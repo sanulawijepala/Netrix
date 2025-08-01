@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&family=Open+Sans&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #0f1117;
+      --text-color: #ffffff;
+      --accent-color: #00ffc3;
+      --transition-speed: 0.3s;
+    }
+    [data-theme="light"] {
+      --bg-color: #f9f9f9;
+      --text-color: #111;
+      --accent-color: #0077ff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      transition: background var(--transition-speed), color var(--transition-speed);
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      overflow-x: hidden;
+      padding-top: 80px; /* Push content below navbar */
+    }
+
+    nav {
+      position: fixed;
+      width: 100%;
+      background: rgba(15, 17, 23, 0.9);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      transition: background 0.3s;
+    }
+
+    nav.scrolled {
+      background: rgba(15, 17, 23, 0.95);
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+
+    nav h1 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--accent-color);
+      font-size: 1.8rem;
+    }
+
+    .toggle-theme {
+      background: none;
+      border: 2px solid var(--accent-color);
+      color: var(--accent-color);
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-left: 1rem;
+      transition: 0.3s;
+    }
+
+    .toggle-theme:hover {
+      background: var(--accent-color);
+      color: var(--bg-color);
+    }
+
+    .home-btn {
+      padding: 0.5rem 1.2rem;
+      font-size: 15px;
+      font-weight: 600;
+      background: linear-gradient(135deg, #0072ff, #00c6ff);
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 20px rgba(0, 114, 255, 0.3);
+    }
+
+    .home-btn:hover {
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 10px 25px rgba(0, 114, 255, 0.4);
+    }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: url('https://www.transparenttextures.com/patterns/dark-mosaic.png'), var(--bg-color);
+      background-attachment: fixed;
+      text-align: center;
+      padding: 0 2rem;
+    }
+
+    .hero h2 {
+      font-size: 3rem;
+      font-family: 'Orbitron', sans-serif;
+      color: var(--accent-color);
+    }
+
+    section {
+      padding: 6rem 10%;
+    }
+
+    section h3 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--accent-color);
+    }
+
+    section p {
+      line-height: 1.8;
+      font-size: 1.1rem;
+      max-width: 800px;
+    }
+
+    .scroll-indicator {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 5px;
+      background: var(--accent-color);
+      width: 0%;
+      z-index: 9999;
+      transition: width 0.1s ease-out;
+    }
+
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: var(--accent-color);
+    }
+  </style>
+</head>
+
+<body data-theme="dark">
+  <div class="scroll-indicator" id="scrollIndicator"></div>
+  
+  <nav id="navbar">
+    <h1>About Us</h1>
+    <div>
+      <button class="home-btn" onclick="goHome()">Home</button>
+      <button class="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
+    </div>
+  </nav>
+
+  <div id="particles-js"></div>
+
+  <div class="hero" data-aos="fade-in">
+    <h2>We Build the Future of Technology</h2>
+  </div>
+
+  <section data-aos="fade-up">
+    <h3>Who We Are</h3>
+    <p>
+      We are a passionate team of innovators, coders, and designers working together to create immersive digital experiences. From intelligent systems to futuristic UI, our work pushes the boundaries of what's possible.
+    </p>
+  </section>
+
+  <section data-aos="fade-up" data-aos-delay="150">
+    <h3>Our Mission</h3>
+    <p>
+      Our mission is to revolutionize the tech world by blending creativity and engineering. We are committed to building clean, powerful, and intuitive solutions for the next generation.
+    </p>
+  </section>
+
+  <section data-aos="fade-up" data-aos-delay="300">
+    <h3>Why Choose Us</h3>
+    <p>
+      With a unique design philosophy, an obsession for performance, and a dedication to excellence, we stand out. We don't just build — we craft experiences that leave lasting impressions.
+    </p>
+  </section>
+
+  <footer>
+    &copy; 2025 Your Company | All Rights Reserved
+  </footer>
+
+  <!-- AOS Animation -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      easing: 'ease-in-out',
+      once: true,
+    });
+  </script>
+
+  <!-- Scroll Progress -->
+  <script>
+    window.onscroll = () => {
+      const scrollIndicator = document.getElementById("scrollIndicator");
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      scrollIndicator.style.width = scrolled + "%";
+
+      document.getElementById("navbar").classList.toggle("scrolled", window.scrollY > 50);
+    };
+  </script>
+
+  <!-- Theme Toggle -->
+  <script>
+    function toggleTheme() {
+      const body = document.body;
+      const current = body.getAttribute("data-theme");
+      body.setAttribute("data-theme", current === "dark" ? "light" : "dark");
+    }
+  </script>
+
+  <!-- Redirect to Home -->
+  <script>
+    function goHome() {
+      window.location.href = "index.html";
+    }
+  </script>
+
+  <!-- Particles.js -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 60 },
+        color: { value: "#00ffc3" },
+        shape: { type: "circle" },
+        opacity: { value: 0.3 },
+        size: { value: 3 },
+        line_linked: {
+          enable: true,
+          distance: 100,
+          color: "#00ffc3",
+          opacity: 0.2,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 1
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "repulse" }
+        },
+        modes: {
+          repulse: { distance: 100 }
+        }
+      },
+      retina_detect: true
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduSyncHub | AI-Powered Student Success Platform</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <style>
+    :root {
+      /* Light Theme */
+      --primary-light: #6C63FF;
+      --secondary-light: #4D44DB;
+      --accent-light: #FF6584;
+      --text-light: #2D3748;
+      --bg-light: #F7FAFC;
+      --card-light: #FFFFFF;
+      --shadow-light: 0 10px 30px rgba(0, 0, 0, 0.05);
+      
+      /* Dark Theme */
+      --primary-dark: #7F78D2;
+      --secondary-dark: #5E4AE3;
+      --accent-dark: #FF7B9C;
+      --text-dark: #EDF2F7;
+      --bg-dark: #1A202C;
+      --card-dark: #2D3748;
+      --shadow-dark: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: background 0.3s, color 0.2s;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg-light);
+      color: var(--text-light);
+      overflow-x: hidden;
+    }
+
+    body.dark-mode {
+      background: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      background: var(--card-light);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .dark-mode .theme-toggle {
+      background: var(--card-dark);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Enhanced Loading Screen */
+    #loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--primary-light), var(--secondary-light));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.8s ease-out;
+    }
+
+    .dark-mode #loading-screen {
+      background: linear-gradient(135deg, var(--primary-dark), var(--secondary-dark));
+    }
+
+    #loading-screen.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .loader-container {
+      position: relative;
+      width: 120px;
+      height: 120px;
+    }
+
+    .loader {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 8px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1.5s linear infinite;
+    }
+
+    .loader:nth-child(2) {
+      width: 80%;
+      height: 80%;
+      top: 10%;
+      left: 10%;
+      animation: spinReverse 2s linear infinite;
+      border-top-color: var(--accent-light);
+    }
+
+    .dark-mode .loader:nth-child(2) {
+      border-top-color: var(--accent-dark);
+    }
+
+    .loader:nth-child(3) {
+      width: 60%;
+      height: 60%;
+      top: 20%;
+      left: 20%;
+      animation: spin 2.5s linear infinite;
+      border-top-color: rgba(255, 255, 255, 0.7);
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes spinReverse {
+      to { transform: rotate(-360deg); }
+    }
+
+    .loading-text {
+      color: white;
+      margin-top: 30px;
+      font-size: 1.2rem;
+      text-align: center;
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    .loading-progress {
+      width: 200px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.3);
+      margin-top: 20px;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: white;
+      animation: progress 2s ease-in-out forwards;
+    }
+
+    @keyframes progress {
+      0% { width: 0%; }
+      100% { width: 100%; }
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 10%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(108, 99, 255, 0.1) 0%, rgba(108, 99, 255, 0) 70%);
+      z-index: -1;
+    }
+
+    .dark-mode .hero::before {
+      background: radial-gradient(circle, rgba(127, 120, 210, 0.1) 0%, rgba(127, 120, 210, 0) 70%);
+    }
+
+    .hero-content {
+      max-width: 600px;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+      background: linear-gradient(45deg, var(--primary-light), var(--accent-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .dark-mode .hero h1 {
+      background: linear-gradient(45deg, var(--primary-dark), var(--accent-dark));
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin-bottom: 2rem;
+    }
+
+    .dark-mode .hero p {
+      opacity: 0.8;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: var(--primary-light);
+      color: white;
+      box-shadow: 0 4px 15px rgba(108, 99, 255, 0.4);
+    }
+
+    .dark-mode .btn-primary {
+      background: var(--primary-dark);
+      box-shadow: 0 4px 15px rgba(127, 120, 210, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(108, 99, 255, 0.6);
+    }
+
+    .dark-mode .btn-primary:hover {
+      box-shadow: 0 6px 20px rgba(127, 120, 210, 0.6);
+    }
+
+    .btn-secondary {
+      border: 2px solid var(--primary-light);
+      color: var(--primary-light);
+    }
+
+    .dark-mode .btn-secondary {
+      border-color: var(--primary-dark);
+      color: var(--primary-dark);
+    }
+
+    .btn-secondary:hover {
+      background: var(--primary-light);
+      color: white;
+    }
+
+    .dark-mode .btn-secondary:hover {
+      background: var(--primary-dark);
+    }
+
+    .hero-image {
+      position: absolute;
+      right: 10%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40%;
+      max-width: 600px;
+      animation: float 6s ease-in-out infinite;
+      filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.2));
+    }
+
+    .dark-mode .hero-image {
+      filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.4)) brightness(0.9);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(-50%) translateX(0); }
+      50% { transform: translateY(-50%) translateX(20px); }
+    }
+
+    /* AI Timetable Preview */
+    .timetable-preview {
+      background: var(--card-light);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-top: 3rem;
+      box-shadow: var(--shadow-light);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dark-mode .timetable-preview {
+      background: var(--card-dark);
+      box-shadow: var(--shadow-dark);
+    }
+
+    .timetable-preview::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary-light), var(--accent-light));
+    }
+
+    .dark-mode .timetable-preview::before {
+      background: linear-gradient(90deg, var(--primary-dark), var(--accent-dark));
+    }
+
+    .timetable-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .timetable-header h3 {
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .timetable-header h3 i {
+      color: var(--accent-light);
+    }
+
+    .dark-mode .timetable-header h3 i {
+      color: var(--accent-dark);
+    }
+
+    .timetable-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+
+    .timetable-day {
+      text-align: center;
+      font-weight: 600;
+      padding: 8px;
+      background: rgba(108, 99, 255, 0.1);
+      border-radius: 8px;
+    }
+
+    .dark-mode .timetable-day {
+      background: rgba(127, 120, 210, 0.1);
+    }
+
+    .timetable-slot {
+      background: rgba(108, 99, 255, 0.05);
+      border-radius: 8px;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 0.9rem;
+      min-height: 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .dark-mode .timetable-slot {
+      background: rgba(127, 120, 210, 0.05);
+    }
+
+    .timetable-slot .subject {
+      font-weight: 600;
+      color: var(--primary-light);
+    }
+
+    .dark-mode .timetable-slot .subject {
+      color: var(--primary-dark);
+    }
+
+    .timetable-slot .time {
+      font-size: 0.8rem;
+      opacity: 0.7;
+      margin-top: 4px;
+    }
+
+    .generate-btn {
+      display: inline-block;
+      margin-top: 1.5rem;
+      background: linear-gradient(90deg, var(--primary-light), var(--accent-light));
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(108, 99, 255, 0.4);
+    }
+
+    .dark-mode .generate-btn {
+      background: linear-gradient(90deg, var(--primary-dark), var(--accent-dark));
+      box-shadow: 0 4px 15px rgba(127, 120, 210, 0.4);
+    }
+
+    /* Features Grid */
+    .features {
+      padding: 8rem 10%;
+      background: var(--bg-light);
+    }
+
+    .dark-mode .features {
+      background: var(--bg-dark);
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      color: var(--text-light);
+    }
+
+    .dark-mode .section-title {
+      color: var(--text-dark);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: var(--card-light);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: var(--shadow-light);
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dark-mode .feature-card {
+      background: var(--card-dark);
+      box-shadow: var(--shadow-dark);
+    }
+
+    .feature-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-light), var(--accent-light));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+
+    .dark-mode .feature-card::after {
+      background: linear-gradient(90deg, var(--primary-dark), var(--accent-dark));
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .dark-mode .feature-card:hover {
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .feature-card:hover::after {
+      transform: scaleX(1);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary-light);
+    }
+
+    .dark-mode .feature-icon {
+      color: var(--primary-dark);
+    }
+
+    .feature-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--text-light);
+      color: white;
+      padding: 3rem 10%;
+      text-align: center;
+    }
+
+    .dark-mode footer {
+      background: var(--text-dark);
+      color: var(--bg-dark);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .dark-mode .footer-links a {
+      color: var(--bg-dark);
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-light);
+    }
+
+    .dark-mode .footer-links a:hover {
+      color: var(--accent-dark);
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 120px;
+      }
+      .hero-content {
+        max-width: 100%;
+      }
+      .cta-buttons {
+        justify-content: center;
+      }
+      .hero-image {
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: none;
+        width: 80%;
+        margin-top: 3rem;
+      }
+      .timetable-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      .timetable-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding: 100px 5% 0;
+      }
+      .timetable-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .hero1 {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--secondary-light) 100%);
+    padding: 4rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .dark-mode .hero1 {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+  }
+
+  .hero1::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 60%);
+    transform: rotate(30deg);
+  }
+
+  .mega-logo {
+    position: relative;
+    z-index: 2;
+    animation: fadeInDown 1s ease-out;
+  }
+
+  .logo-icon {
+    font-size: 5rem;
+    color: white;
+    display: block;
+    margin-bottom: 1rem;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+
+  .logo-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 6rem;
+    font-weight: 800;
+    color: white;
+    line-height: 1;
+    margin: 0;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    letter-spacing: -1px;
+  }
+
+  .logo-tagline {
+    font-size: 1.5rem;
+    color: rgba(255,255,255,0.9);
+    margin-top: 1rem;
+    font-weight: 300;
+    letter-spacing: 3px;
+  }
+
+  @media (max-width: 768px) {
+    .logo-text {
+      font-size: 4rem;
+    }
+    .logo-icon {
+      font-size: 3.5rem;
+    }
+    .logo-tagline {
+      font-size: 1.2rem;
+    }
+  }
+
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .dark-mode .hero h1 {
+    background: linear-gradient(45deg, var(--accent-dark), #FFD700);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+    color: var(--text-light);
+  }
+  
+  .dark-mode .hero-subtitle {
+    color: rgba(237, 242, 247, 0.85);
+  }
+  
+  /* Section gap styling */
+  .section-gap {
+    height: 80px;
+    background: var(--bg-light);
+    position: relative;
+  }
+  
+  .dark-mode .section-gap {
+    background: var(--bg-dark);
+  }
+  
+  /* Improved hero1 for dark mode */
+  .dark-mode .hero1::before {
+    background: radial-gradient(circle, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 60%);
+  }
+  
+  .dark-mode .logo-text {
+    text-shadow: 0 5px 15px rgba(0,0,0,0.4);}
+    .timetable-options {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .option-btn {
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: rgba(108, 99, 255, 0.1);
+    border: 1px solid var(--primary-light);
+    color: var(--primary-light);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .dark-mode .option-btn {
+    border-color: var(--primary-dark);
+    color: var(--primary-dark);
+    background: rgba(127, 120, 210, 0.1);
+  }
+  
+  .option-btn.active {
+    background: var(--primary-light);
+    color: white;
+  }
+  
+  .dark-mode .option-btn.active {
+    background: var(--primary-dark);
+  }
+  
+  .generate-btn i {
+    margin-right: 8px;
+  }
+  </style>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div id="loading-screen">
+    <div class="loader-container">
+      <div class="loader"></div>
+      <div class="loader"></div>
+      <div class="loader"></div>
+    </div>
+    <p class="loading-text">Initializing AI-Powered Learning Environment</p>
+    <div class="loading-progress">
+      <div class="progress-bar"></div>
+    </div>
+  </div>
+
+  <!-- Theme Toggle -->
+  <div class="theme-toggle" id="themeToggle">
+    <i class="fas fa-moon"></i>
+  </div>
+<section class="hero1">
+  <div class="hero1-content">
+    <div class="mega-logo">
+      <span class="logo-icon"><i class="fas fa-graduation-cap"></i></span>
+      <h1 class="logo-text">EduSyncHub</h1>
+      <p class="logo-tagline">AI-Powered Academic Success</p>
+    </div>
+  </div>
+</section>
+<div class="section-gap"></div> <!-- Added gap -->
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content animate__animated animate__fadeInLeft">
+      <h1>Your AI-Powered Academic Companion</h1>
+      <p>EduSyncHub revolutionizes learning with smart scheduling, gamified challenges, and collaborative tools designed to maximize your success.</p>
+      <div class="cta-buttons">
+        <a href="login.html" class="btn btn-primary">
+          <i class="fas fa-sign-in-alt"></i> Login
+        </a>
+        <a href="register.html" class="btn btn-secondary">
+          <i class="fas fa-user-plus"></i> Register
+        </a>
+      </div>
+
+     <div class="timetable-preview animate__animated animate__fadeInUp" style="animation-delay: 0.2s">
+  <div class="timetable-header">
+    <h3><i class="fas fa-robot"></i> AI-Generated Smart Timetable</h3>
+    <div class="timetable-options">
+      <button class="option-btn active" id="focusWeak">Focus on Weak Subjects</button>
+      <button class="option-btn" id="equalFocus">Balance All Subjects</button>
+    </div>
+  </div>
+  
+  <div class="timetable-grid" id="timetableGrid">
+    <!-- Timetable will be generated here by JavaScript -->
+  </div>
+  
+  <button class="generate-btn" id="generateTimetable">
+    <i class="fas fa-sync-alt"></i> Generate New Timetable
+  </button>
+</div>
+        <a href="timetable.html" class="generate-btn">Go to page</a>
+      </div>
+    </div>
+    <img src="resources/f4cf44f8-8fee-4099-baa1-966a1dfb0aa7.svg" alt="Student Learning" class="hero-image animate__animated animate__fadeInRight">
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <h2 class="section-title animate__animated animate__fadeIn">Why Students Love EduSyncHub</h2>
+    <div class="features-grid">
+      <div class="feature-card animate__animated animate__fadeInUp" style="animation-delay: 0.1s">
+        <div class="feature-icon">
+          <i class="fas fa-robot"></i>
+        </div>
+        <h3>Smart AI Scheduling</h3>
+        <p>Automatically generates optimized study plans based on your syllabus, deadlines, and performance.</p>
+        <a href="ai-scheduler.html" style="color: var(--primary-light); font-weight: 600;">Try It Now →</a>
+      </div>
+      <div class="feature-card animate__animated animate__fadeInUp" style="animation-delay: 0.2s">
+        <div class="feature-icon">
+          <i class="fas fa-gamepad"></i>
+        </div>
+        <h3>Interactive Quiz Arena</h3>
+        <p>Earn Reward Points by competing in subject-based challenges with difficulty levels.</p>
+        <a href="quiz.html" style="color: var(--primary-light); font-weight: 600;">Start Playing →</a>
+      </div>
+      <div class="feature-card animate__animated animate__fadeInUp" style="animation-delay: 0.3s">
+        <div class="feature-icon">
+          <i class="fas fa-trophy"></i>
+        </div>
+        <h3>Competitive Leaderboards</h3>
+        <p>Climb weekly rankings and unlock achievements based on your RP score.</p>
+        <a href="leaderboard.html" style="color: var(--primary-light); font-weight: 600;">View Rankings →</a>
+      </div>
+      <div class="feature-card animate__animated animate__fadeInUp" style="animation-delay: 0.4s">
+        <div class="feature-icon">
+          <i class="fas fa-comments"></i>
+        </div>
+        <h3>Live Study Hub</h3>
+        <p>Real-time chat with classmates, share notes, and form study groups.</p>
+        <a href="chat.html" style="color: var(--primary-light); font-weight: 600;">Join Conversation →</a>
+      </div>
+      <div class="feature-card animate__animated animate__fadeInUp" style="animation-delay: 0.5s">
+        <div class="feature-icon">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <h3>Performance Analytics</h3>
+        <p>Visual dashboards track your progress across all subjects and skills.</p>
+        <a href="analytics.html" style="color: var(--primary-light); font-weight: 600;">See Your Growth →</a>
+      </div>
+      <div class="feature-card animate__animated animate__fadeInUp" style="animation-delay: 0.6s">
+        <div class="feature-icon">
+          <i class="fas fa-book-open"></i>
+        </div>
+        <h3>Smart Resource Library</h3>
+        <p>AI-curated textbooks, video lectures, and past papers tailored to your needs.</p>
+        <a href="library.html" style="color: var(--primary-light); font-weight: 600;">Explore Resources →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-links">
+      <a href="about.html">About</a>
+     <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </div>
+    <p>© 2025 EduSyncHub | Revolutionizing Education Through AI</p>
+  </footer>
+
+  <script>
+    // Loading screen fade-out
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        document.getElementById('loading-screen').classList.add('fade-out');
+      }, 2500); // 2.5s for smoother transition
+    });
+
+    // Theme Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    
+    // Check for saved theme preference
+    if (localStorage.getItem('theme') === 'dark') {
+      body.classList.add('dark-mode');
+      themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+    
+    themeToggle.addEventListener('click', function() {
+      body.classList.toggle('dark-mode');
+      
+      if (body.classList.contains('dark-mode')) {
+        localStorage.setItem('theme', 'dark');
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      } else {
+        localStorage.setItem('theme', 'light');
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+      }
+    });
+
+    // Animate elements when scrolling
+    const animateOnScroll = function() {
+      const elements = document.querySelectorAll('.animate__animated');
+      elements.forEach(el => {
+        const elementPosition = el.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        if (elementPosition < windowHeight - 100) {
+          const animation = el.classList[1].split('animate__')[1];
+          el.classList.add('animate__' + animation);
+        }
+      });
+    };
+    
+    window.addEventListener('scroll', animateOnScroll);
+    animateOnScroll(); // Trigger on load
+
+    // Simulate timetable generation (demo only)
+    document.querySelector('.generate-btn').addEventListener('click', function(e) {
+      e.preventDefault();
+      this.textContent = 'Generating...';
+      this.style.opacity = '0.7';
+      
+      setTimeout(() => {
+        this.innerHTML = '<i class="fas fa-check"></i> Timetable Ready!';
+        this.style.opacity = '1';
+        
+        // Reset after 2 seconds
+        setTimeout(() => {
+          this.textContent = 'Generate Personalized Timetable';
+        }, 2000);
+      }, 1500);
+    });
+    // Timetable data
+  const subjects = {
+    weak: ["Math", "Science", "History"],
+    average: ["Sinhala", "Literature", "Business Studies"],
+    strong: ["English", "Religion", "ICT"]
+  };
+  
+  const timeSlots = ["9:00-10:30", "11:00-12:30", "14:00-15:30", "16:00-17:30"];
+  const days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+  
+  // Generate timetable based on focus mode
+  function generateTimetable(focusMode) {
+    const timetableGrid = document.getElementById('timetableGrid');
+    timetableGrid.innerHTML = '';
+    
+    // Create day headers
+    days.forEach(day => {
+      const dayElement = document.createElement('div');
+      dayElement.className = 'timetable-day';
+      dayElement.textContent = day;
+      timetableGrid.appendChild(dayElement);
+    });
+    
+    // Generate time slots
+    timeSlots.forEach(slot => {
+      days.forEach(day => {
+        const slotElement = document.createElement('div');
+        slotElement.className = 'timetable-slot';
+        
+        // AI-based subject selection logic
+        let subject;
+        if (focusMode === 'weak') {
+          // 60% weak subjects, 30% average, 10% strong
+          const rand = Math.random();
+          subject = rand < 0.6 ? getRandomSubject('weak') :
+                   rand < 0.9 ? getRandomSubject('average') :
+                   getRandomSubject('strong');
+        } else {
+          // Equal distribution
+          const allSubjects = [...subjects.weak, ...subjects.average, ...subjects.strong];
+          subject = allSubjects[Math.floor(Math.random() * allSubjects.length)];
+        }
+        
+        slotElement.innerHTML = `
+          <span class="subject">${subject}</span>
+          <span class="time">${slot}</span>
+          ${focusMode === 'weak' && subjects.weak.includes(subject) ? 
+            '<span class="focus-badge"><i class="fas fa-bolt"></i> Focus</span>' : ''}
+        `;
+        
+        timetableGrid.appendChild(slotElement);
+      });
+    });
+  }
+  
+  function getRandomSubject(level) {
+    const subjectList = subjects[level];
+    return subjectList[Math.floor(Math.random() * subjectList.length)];
+  }
+  
+  // Event listeners
+  document.getElementById('focusWeak').addEventListener('click', function() {
+    this.classList.add('active');
+    document.getElementById('equalFocus').classList.remove('active');
+    generateTimetable('weak');
+  });
+  
+  document.getElementById('equalFocus').addEventListener('click', function() {
+    this.classList.add('active');
+    document.getElementById('focusWeak').classList.remove('active');
+    generateTimetable('equal');
+  });
+  
+  document.getElementById('generateTimetable').addEventListener('click', function() {
+    const focusMode = document.querySelector('.option-btn.active').id === 'focusWeak' ? 'weak' : 'equal';
+    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+    
+    setTimeout(() => {
+      generateTimetable(focusMode);
+      this.innerHTML = '<i class="fas fa-sync-alt"></i> Generate New Timetable';
+    }, 800);
+  });
+  
+  // Initial generation
+  generateTimetable('weak');
+  </script>
+</body>
+</html>
