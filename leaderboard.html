@@ -21,9 +21,6 @@
       --danger: #F44336;
       --warning: #FFC107;
       --info: #2196F3;
-      --math: #4CAF50;
-      --science: #2196F3;
-      --ict: #9C27B0;
     }
     
     * {
@@ -39,6 +36,7 @@
       min-height: 100vh;
     }
     
+    /* Header */
     .header {
       background: white;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -109,91 +107,36 @@
       font-size: 0.9rem;
     }
     
+    /* Main Container */
     .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 30px 20px;
     }
     
-    .leaderboard-container {
-      background: white;
-      border-radius: 16px;
-      padding: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-      animation: fadeIn 0.5s;
-    }
-    
-    .leaderboard-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      padding-bottom: 15px;
-      border-bottom: 1px solid #eee;
-    }
-    
-    .leaderboard-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--primary);
-    }
-    
-    .leaderboard-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-    
-    .leaderboard-table th,
-    .leaderboard-table td {
-      padding: 15px;
-      text-align: left;
-      border-bottom: 1px solid #eee;
-    }
-    
-    .leaderboard-table th {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: white;
-      font-weight: 600;
-    }
-    
-    .leaderboard-table td {
-      font-size: 1rem;
-    }
-    
-    .leaderboard-table tr:nth-child(1) td {
-      color: #FFD700;
-      font-weight: 700;
-    }
-    
-    .leaderboard-table tr:nth-child(2) td {
-      color: #C0C0C0;
-    }
-    
-    .leaderboard-table tr:nth-child(3) td {
-      color: #CD7F32;
-    }
-    
-    .registration-container {
+    /* Login Section */
+    .login-section {
       background: white;
       border-radius: 16px;
       padding: 30px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.05);
       max-width: 500px;
       margin: 0 auto;
-      animation: fadeIn 0.5s;
+      animation: fadeInDown 0.5s;
     }
     
-    .registration-form {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
+    .login-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 20px;
     }
     
     .form-group {
       display: flex;
       flex-direction: column;
       gap: 8px;
+      margin-bottom: 20px;
     }
     
     .form-label {
@@ -215,41 +158,133 @@
       box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
     }
     
-    .register-btn {
-      padding: 12px 30px;
-      border-radius: 50px;
+    .login-btn {
       background: var(--primary);
       color: white;
       border: none;
+      padding: 15px 25px;
+      border-radius: 8px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       justify-content: center;
-      margin: 0 auto;
     }
     
-    .register-btn:hover {
+    .login-btn:hover {
       background: var(--secondary);
-      transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(108, 99, 255, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
     }
     
     .error-message {
       color: var(--danger);
       font-size: 0.9rem;
-      text-align: center;
       margin-top: 10px;
       display: none;
     }
     
+    /* Leaderboard Section */
+    .leaderboard-section {
+      background: white;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      animation: fadeIn 0.5s;
+    }
+    
+    .leaderboard-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+    
+    .leaderboard-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .leaderboard-table th,
+    .leaderboard-table td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .leaderboard-table th {
+      background: #f8f9fa;
+      font-weight: 600;
+      color: var(--dark);
+    }
+    
+    .leaderboard-table tr:hover {
+      background: rgba(108, 99, 255, 0.05);
+    }
+    
+    .medal {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      margin-right: 8px;
+    }
+    
+    .medal-gold {
+      background: linear-gradient(45deg, #FFD700, #FFA500);
+      color: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    
+    .medal-silver {
+      background: linear-gradient(45deg, #C0C0C0, #A9A9A9);
+      color: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    
+    .medal-bronze {
+      background: linear-gradient(45deg, #CD7F32, #A0522D);
+      color: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    
+    .points-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 10px;
+      background: #FFF4E5;
+      color: #D97706;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+    
+    .points-badge i {
+      margin-right: 5px;
+    }
+    
+    /* Animations */
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
     
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Responsive */
     @media (max-width: 768px) {
       .header-container {
         flex-direction: column;
@@ -264,11 +299,17 @@
       .leaderboard-table th,
       .leaderboard-table td {
         padding: 10px;
+        font-size: 0.9rem;
       }
+    }
+    
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 <body>
+  <!-- Header -->
   <header class="header">
     <div class="header-container">
       <a href="index.html" class="logo">
@@ -278,42 +319,36 @@
         <div class="logo-text">EduSyncHub</div>
       </a>
       <nav class="nav-links">
-        <a href="index.html" class="nav-link">
-          <i class="fas fa-home"></i> Home
-        </a>
-        <a href="quiz.html" class="nav-link">
-          <i class="fas fa-gamepad"></i> Quiz
-        </a>
-        <a href="leaderboard.html" class="nav-link active">
-          <i class="fas fa-trophy"></i> Leaderboard
-        </a>
-        <a href="admin.html" class="nav-link">
-          <i class="fas fa-user-shield"></i> Admin
-        </a>
+        <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+        <a href="quiz.html" class="nav-link"><i class="fas fa-gamepad"></i> Quiz</a>
+        <a href="leaderboard.html" class="nav-link active"><i class="fas fa-trophy"></i> Leaderboard</a>
+        <a href="admin.html" class="nav-link"><i class="fas fa-user-shield"></i> Admin</a>
+        <button id="logoutBtn" class="nav-link hidden"><i class="fas fa-sign-out-alt"></i> Logout</button>
       </nav>
     </div>
   </header>
 
+  <!-- Main Content -->
   <main class="container">
-    <div class="registration-container" id="registrationContainer">
-      <h2 class="leaderboard-title">Register to View Leaderboard</h2>
-      <form class="registration-form" id="registrationForm">
-        <div class="form-group">
-          <label class="form-label" for="usernameInput">Username</label>
-          <input type="text" class="form-input" id="usernameInput" placeholder="Enter your username" required>
-        </div>
-        <button type="submit" class="register-btn">
-          <i class="fas fa-user-plus"></i> Register
-        </button>
-        <div class="error-message" id="errorMessage">Username already taken. Please choose another.</div>
-      </form>
-    </div>
-    
-    <div class="leaderboard-container" id="leaderboardContainer" style="display: none;">
-      <div class="leaderboard-header">
-        <h2 class="leaderboard-title">Leaderboard</h2>
+    <!-- Login Section -->
+    <section id="loginSection" class="login-section">
+      <h2 class="login-title">Login to View Leaderboard</h2>
+      <div class="form-group">
+        <label for="loginUsername" class="form-label">Username</label>
+        <input type="text" id="loginUsername" class="form-input" required>
       </div>
-      <table class="leaderboard-table" id="leaderboardTable">
+      <div class="form-group">
+        <label for="loginPassword" class="form-label">Password</label>
+        <input type="password" id="loginPassword" class="form-input" required>
+      </div>
+      <button id="loginBtn" class="login-btn"><i class="fas fa-sign-in-alt"></i> Login</button>
+      <p id="loginError" class="error-message">Invalid username or password.</p>
+    </section>
+
+    <!-- Leaderboard Section -->
+    <section id="leaderboardSection" class="leaderboard-section hidden">
+      <h2 class="leaderboard-title">Leaderboard</h2>
+      <table class="leaderboard-table">
         <thead>
           <tr>
             <th>Rank</th>
@@ -321,118 +356,149 @@
             <th>Reward Points</th>
           </tr>
         </thead>
-        <tbody id="leaderboardBody">
-          <!-- Leaderboard entries will be inserted here -->
-        </tbody>
+        <tbody id="leaderboardBody"></tbody>
       </table>
-    </div>
+    </section>
   </main>
 
   <script>
-    // User data management
-    let users = JSON.parse(localStorage.getItem('users')) || [];
-    let currentUser = localStorage.getItem('currentUser') || null;
+    // Fetch leaderboard data
+    async function fetchLeaderboard() {
+      try {
+        const response = await fetch('api/getLeaderboard.php', {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' }
+        });
+        const data = await response.json();
+        if (data.error) {
+          console.error('Leaderboard error:', data.error);
+          return [];
+        }
+        return data;
+      } catch (error) {
+        console.error('Error fetching leaderboard:', error);
+        return [];
+      }
+    }
 
-    // DOM Elements
-    const registrationContainer = document.getElementById('registrationContainer');
-    const leaderboardContainer = document.getElementById('leaderboardContainer');
-    const registrationForm = document.getElementById('registrationForm');
-    const usernameInput = document.getElementById('usernameInput');
-    const errorMessage = document.getElementById('errorMessage');
-    const leaderboardBody = document.getElementById('leaderboardBody');
+    // Cookie management
+    function setCookie(name, value, days) {
+      const date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      const expires = "expires=" + date.toUTCString();
+      document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    }
 
-    // Initialize the page
-    function init() {
-      if (currentUser) {
-        showLeaderboard();
+    function getCookie(name) {
+      const cname = name + "=";
+      const decodedCookie = decodeURIComponent(document.cookie);
+      const ca = decodedCookie.split(';');
+      for (let c of ca) {
+        c = c.trim();
+        if (c.indexOf(cname) === 0) {
+          return c.substring(cname.length, c.length);
+        }
+      }
+      return "";
+    }
+
+    function deleteCookie(name) {
+      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;";
+    }
+
+    // Check login status
+    async function checkLogin() {
+      const username = getCookie('username');
+      if (username) {
+        document.getElementById('loginSection').classList.add('hidden');
+        document.getElementById('leaderboardSection').classList.remove('hidden');
+        document.getElementById('logoutBtn').classList.remove('hidden');
+        loadLeaderboard();
       } else {
-        registrationContainer.style.display = 'block';
-        leaderboardContainer.style.display = 'none';
+        document.getElementById('loginSection').classList.remove('hidden');
+        document.getElementById('leaderboardSection').classList.add('hidden');
+        document.getElementById('logoutBtn').classList.add('hidden');
       }
-      setupEventListeners();
     }
 
-    // Setup event listeners
-    function setupEventListeners() {
-      registrationForm.addEventListener('submit', handleRegistration);
-    }
-
-    // Handle user registration
-    function handleRegistration(e) {
-      e.preventDefault();
-      const username = usernameInput.value.trim();
-
-      if (username === '') {
-        showError('Please enter a username');
-        return;
+    // Load leaderboard with cookie integration
+    async function loadLeaderboard() {
+      const username = getCookie('username');
+      const cookiePoints = parseInt(getCookie('rewardPoints')) || 0;
+      let users = await fetchLeaderboard();
+      if (username && cookiePoints > 0) {
+        const userIndex = users.findIndex(user => user.username === username);
+        if (userIndex >= 0) {
+          users[userIndex].rewardPoints = Math.max(users[userIndex].rewardPoints, cookiePoints);
+        } else {
+          users.push({ username, rewardPoints: cookiePoints });
+        }
       }
-
-      if (users.some(user => user.username === username)) {
-        showError('Username already taken. Please choose another.');
-        return;
-      }
-
-      // Register new user
-      const rewardPoints = parseInt(localStorage.getItem('rewardPoints')) || 0;
-      users.push({ username, rewardPoints });
-      localStorage.setItem('users', JSON.stringify(users));
-      localStorage.setItem('currentUser', username);
-
-      // Update current user
-      currentUser = username;
-      showLeaderboard();
-
-      // Reset form
-      registrationForm.reset();
-    }
-
-    // Display error message
-    function showError(message) {
-      errorMessage.textContent = message;
-      errorMessage.style.display = 'block';
-      setTimeout(() => {
-        errorMessage.style.display = 'none';
-      }, 3000);
-    }
-
-    // Display leaderboard
-    function showLeaderboard() {
-      registrationContainer.style.display = 'none';
-      leaderboardContainer.style.display = 'block';
-
-      // Sort users by reward points (descending)
-      users.sort((a, b) => b.rewardPoints - a.rewardPoints);
-
-      // Clear existing leaderboard
-      leaderboardBody.innerHTML = '';
-
-      // Populate leaderboard
+      users.sort((a, b) => b.rewardPoints - a.rewardPoints); // Sort by points
+      const tbody = document.getElementById('leaderboardBody');
+      tbody.innerHTML = '';
       users.forEach((user, index) => {
+        let medal = '';
+        if (index === 0) {
+          medal = '<span class="medal medal-gold">🏆</span>';
+        } else if (index === 1) {
+          medal = '<span class="medal medal-silver">🥈</span>';
+        } else if (index === 2) {
+          medal = '<span class="medal medal-bronze">🥉</span>';
+        }
         const row = document.createElement('tr');
+        row.className = `animate__animated animate__fadeIn ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`;
         row.innerHTML = `
-          <td>${index + 1}</td>
+          <td>${index + 1} ${medal}</td>
           <td>${user.username}</td>
-          <td>${user.rewardPoints}</td>
+          <td><span class="points-badge"><i class="fas fa-coins"></i> ${user.rewardPoints}</span></td>
         `;
-        leaderboardBody.appendChild(row);
+        tbody.appendChild(row);
       });
     }
 
-    // Synchronize reward points with quiz system
-    function syncRewardPoints() {
-      if (currentUser) {
-        const rewardPoints = parseInt(localStorage.getItem('rewardPoints')) || 0;
-        const userIndex = users.findIndex(user => user.username === currentUser);
-        if (userIndex !== -1) {
-          users[userIndex].rewardPoints = rewardPoints;
-          localStorage.setItem('users', JSON.stringify(users));
-        }
-      }
+    // Poll leaderboard every 10 seconds
+    function startLeaderboardPolling() {
+      loadLeaderboard();
+      setInterval(loadLeaderboard, 10000);
     }
 
-    // Initialize and sync reward points
-    syncRewardPoints();
-    init();
+    // Login handler
+    document.getElementById('loginBtn').addEventListener('click', async () => {
+      const username = document.getElementById('loginUsername').value.trim();
+      const password = document.getElementById('loginPassword').value.trim();
+      try {
+        const response = await fetch('api/login.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+        const result = await response.json();
+        if (result.success) {
+          setCookie('username', username, 1);
+          document.getElementById('loginError').classList.add('hidden');
+          checkLogin();
+        } else {
+          document.getElementById('loginError').textContent = result.message || 'Invalid username or password.';
+          document.getElementById('loginError').classList.remove('hidden');
+        }
+      } catch (error) {
+        console.error('Login error:', error);
+        document.getElementById('loginError').textContent = 'Login failed. Please try again.';
+        document.getElementById('loginError').classList.remove('hidden');
+      }
+    });
+
+    // Logout handler
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      deleteCookie('username');
+      deleteCookie('rewardPoints');
+      checkLogin();
+    });
+
+    // Initialize
+    checkLogin();
+    startLeaderboardPolling();
   </script>
 </body>
 </html>

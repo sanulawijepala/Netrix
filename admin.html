@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Portal | EduSyncHub</title>
+  <title>Admin Panel | EduSyncHub</title>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
   <!-- Font Awesome -->
@@ -19,35 +19,30 @@
       --light: #F7FAFC;
       --success: #4CAF50;
       --danger: #F44336;
-      --warning: #FFC107;
-      --info: #2196F3;
-      --math: #4CAF50;
-      --science: #2196F3;
-      --ict: #9C27B0;
     }
-
+    
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
       font-family: 'Poppins', sans-serif;
     }
-
+    
     body {
-      background: linear-gradient(135deg, #e6e9f0, #f5f7fa);
+      background-color: #f5f7fa;
       color: var(--dark);
       min-height: 100vh;
     }
-
+    
     .header {
       background: white;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       padding: 15px 0;
       position: sticky;
       top: 0;
       z-index: 100;
     }
-
+    
     .header-container {
       max-width: 1200px;
       margin: 0 auto;
@@ -56,14 +51,14 @@
       justify-content: space-between;
       align-items: center;
     }
-
+    
     .logo {
       display: flex;
       align-items: center;
       gap: 10px;
       text-decoration: none;
     }
-
+    
     .logo-icon {
       width: 40px;
       height: 40px;
@@ -75,7 +70,7 @@
       color: white;
       font-size: 1.2rem;
     }
-
+    
     .logo-text {
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
@@ -85,12 +80,12 @@
       background-clip: text;
       color: transparent;
     }
-
+    
     .nav-links {
       display: flex;
       gap: 20px;
     }
-
+    
     .nav-link {
       text-decoration: none;
       color: var(--dark);
@@ -100,164 +95,48 @@
       align-items: center;
       gap: 5px;
     }
-
+    
     .nav-link:hover {
       color: var(--primary);
     }
-
+    
     .nav-link i {
       font-size: 0.9rem;
     }
-
+    
     .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 30px 20px;
     }
-
-    .admin-login {
+    
+    .admin-section {
       background: white;
       border-radius: 16px;
       padding: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      max-width: 500px;
-      margin: 0 auto;
-      animation: fadeIn 0.5s;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      animation: fadeInDown 0.5s;
     }
-
-    .admin-login h2 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    .admin-login-form {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .form-label {
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
-
-    .form-input {
-      padding: 12px 15px;
-      border-radius: 8px;
-      border: 2px solid #eee;
-      font-size: 1rem;
-      transition: all 0.3s;
-    }
-
-    .form-input:focus {
-      border-color: var(--primary);
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
-    }
-
-    .login-btn {
-      padding: 12px 30px;
-      border-radius: 50px;
-      background: var(--primary);
-      color: white;
-      border: none;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      justify-content: center;
-      margin: 0 auto;
-    }
-
-    .login-btn:hover {
-      background: var(--secondary);
-      transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(108, 99, 255, 0.4);
-    }
-
-    .error-message {
-      color: var(--danger);
-      font-size: 0.9rem;
-      text-align: center;
-      margin-top: 10px;
-      display: none;
-    }
-
-    .admin-panel, .leaderboard-container, .user-progress-container {
-      background: white;
-      border-radius: 16px;
-      padding: 30px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      margin-bottom: 30px;
-      animation: fadeIn 0.5s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .admin-panel::before, .leaderboard-container::before, .user-progress-container::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 8px;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-    }
-
+    
     .admin-title {
       font-size: 1.5rem;
       font-weight: 700;
       color: var(--primary);
       margin-bottom: 20px;
     }
-
-    .tabs {
+    
+    .form-group {
       display: flex;
-      border-bottom: 2px solid #eee;
+      flex-direction: column;
+      gap: 8px;
       margin-bottom: 20px;
     }
-
-    .tab {
-      padding: 12px 25px;
-      cursor: pointer;
+    
+    .form-label {
       font-weight: 600;
-      color: var(--dark);
-      opacity: 0.7;
-      transition: all 0.3s;
-      border-bottom: 3px solid transparent;
+      font-size: 0.9rem;
     }
-
-    .tab.active {
-      opacity: 1;
-      color: var(--primary);
-      border-bottom-color: var(--primary);
-    }
-
-    .tab-content {
-      display: none;
-    }
-
-    .tab-content.active {
-      display: block;
-    }
-
-    .quiz-form {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-    }
-
+    
     .form-input, .form-select, .form-textarea {
       padding: 12px 15px;
       border-radius: 8px;
@@ -265,28 +144,57 @@
       font-size: 1rem;
       transition: all 0.3s;
     }
-
+    
     .form-input:focus, .form-select:focus, .form-textarea:focus {
       border-color: var(--primary);
       outline: none;
       box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
     }
-
+    
     .form-textarea {
       min-height: 100px;
       resize: vertical;
     }
-
+    
+    .admin-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 15px 25px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+    }
+    
+    .admin-btn:hover {
+      background: var(--secondary);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
+    }
+    
+    .error-message {
+      color: var(--danger);
+      font-size: 0.9rem;
+      margin-top: 10px;
+      display: none;
+    }
+    
     .option-item {
       display: flex;
       gap: 10px;
       align-items: center;
+      margin-bottom: 10px;
     }
-
+    
     .option-item input[type="text"] {
       flex-grow: 1;
     }
-
+    
     .option-item button {
       background: var(--danger);
       color: white;
@@ -300,244 +208,54 @@
       cursor: pointer;
       transition: all 0.3s;
     }
-
+    
     .option-item button:hover {
       background: #d32f2f;
     }
-
+    
     .add-option-btn {
       background: var(--success);
       color: white;
       border: none;
       padding: 10px 15px;
       border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
       cursor: pointer;
       transition: all 0.3s;
       margin-top: 10px;
     }
-
+    
     .add-option-btn:hover {
       background: #388E3C;
     }
-
-    .add-quiz-btn {
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 15px 25px;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
+    
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
-
-    .add-quiz-btn:hover {
-      background: var(--secondary);
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
-    }
-
-    .quiz-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 20px;
-      margin-top: 30px;
-    }
-
-    .quiz-card {
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-      transition: all 0.3s;
-    }
-
-    .quiz-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    }
-
-    .quiz-card-header {
-      padding: 15px;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: white;
-    }
-
-    .quiz-card-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-    }
-
-    .quiz-card-meta {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.8rem;
-      opacity: 0.8;
-    }
-
-    .quiz-card-body {
-      padding: 15px;
-    }
-
-    .quiz-card-actions {
-      display: flex;
-      gap: 10px;
-    }
-
-    .quiz-card-btn {
-      flex-grow: 1;
-      padding: 10px;
-      border-radius: 8px;
-      border: none;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .quiz-card-btn.edit {
-      background: var(--info);
-      color: white;
-    }
-
-    .quiz-card-btn.delete {
-      background: var(--danger);
-      color: white;
-    }
-
-    .quiz-card-btn:hover {
-      opacity: 0.9;
-      transform: translateY(-2px);
-    }
-
-    .leaderboard-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-
-    .leaderboard-table th,
-    .leaderboard-table td {
-      padding: 15px;
-      text-align: left;
-      border-bottom: 1px solid #eee;
-    }
-
-    .leaderboard-table th {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: white;
-      font-weight: 600;
-    }
-
-    .leaderboard-table tr:nth-child(1) td {
-      color: #FFD700;
-      font-weight: 700;
-    }
-
-    .leaderboard-table tr:nth-child(2) td {
-      color: #C0C0C0;
-    }
-
-    .leaderboard-table tr:nth-child(3) td {
-      color: #CD7F32;
-    }
-
-    .leaderboard-table .delete-user-btn {
-      padding: 8px 15px;
-      border-radius: 8px;
-      background: var(--danger);
-      color: white;
-      border: none;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .leaderboard-table .delete-user-btn:hover {
-      background: #d32f2f;
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(244, 67, 54, 0.3);
-    }
-
-    .progress-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-
-    .progress-table th,
-    .progress-table td {
-      padding: 12px;
-      text-align: left;
-      border-bottom: 1px solid #eee;
-    }
-
-    .progress-table th {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: white;
-      font-weight: 600;
-    }
-
-    .progress-bar {
-      height: 10px;
-      background: #e0e0e0;
-      border-radius: 5px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      transition: width 0.5s ease;
-    }
-
-    .category-math { background-color: var(--math); }
-    .category-science { background-color: var(--science); }
-    .category-ict { background-color: var(--ict); }
-
-    .logout-btn {
-      padding: 10px 20px;
-      border-radius: 50px;
-      background: var(--danger);
-      color: white;
-      border: none;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .logout-btn:hover {
-      background: #d32f2f;
-      transform: translateY(-2px);
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
+    
     @media (max-width: 768px) {
       .header-container {
         flex-direction: column;
         gap: 15px;
       }
-
+      
       .nav-links {
         width: 100%;
         justify-content: space-around;
       }
-
-      .tabs {
-        flex-direction: column;
-      }
-
-      .tab {
-        width: 100%;
-        text-align: center;
-      }
-
-      .quiz-list {
-        grid-template-columns: 1fr;
-      }
+    }
+    
+    .hidden {
+      display: none;
     }
   </style>
 </head>
@@ -551,505 +269,168 @@
         <div class="logo-text">EduSyncHub</div>
       </a>
       <nav class="nav-links">
-        <a href="index.html" class="nav-link">
-          <i class="fas fa-home"></i> Home
-        </a>
-        <a href="quiz.html" class="nav-link">
-          <i class="fas fa-gamepad"></i> Quiz
-        </a>
-        <a href="leaderboard.html" class="nav-link">
-          <i class="fas fa-trophy"></i> Leaderboard
-        </a>
-        <a href="adminaccess.html" class="nav-link active">
-          <i class="fas fa-user-shield"></i> Admin
-        </a>
+        <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
+        <a href="quiz.html" class="nav-link"><i class="fas fa-gamepad"></i> Quiz</a>
+        <a href="leaderboard.html" class="nav-link"><i class="fas fa-trophy"></i> Leaderboard</a>
+        <a href="admin.html" class="nav-link active"><i class="fas fa-user-shield"></i> Admin</a>
+        <button id="logoutBtn" class="nav-link hidden"><i class="fas fa-sign-out-alt"></i> Logout</button>
       </nav>
     </div>
   </header>
 
   <main class="container">
-    <div class="admin-login" id="adminLogin">
-      <h2>Admin Login</h2>
-      <form class="admin-login-form" id="adminLoginForm">
+    <section id="adminLoginSection" class="admin-section">
+      <h2 class="admin-title">Admin Login</h2>
+      <div class="form-group">
+        <label for="adminPassword" class="form-label">Admin Password</label>
+        <input type="password" id="adminPassword" class="form-input" required>
+      </div>
+      <button id="adminLoginBtn" class="admin-btn"><i class="fas fa-sign-in-alt"></i> Login</button>
+      <p id="adminError" class="error-message">Invalid admin password.</p>
+    </section>
+
+    <section id="adminPanel" class="admin-section hidden">
+      <h2 class="admin-title">Admin Panel</h2>
+      <form id="quizForm" class="form-group">
         <div class="form-group">
-          <label class="form-label" for="adminPassword">Password</label>
-          <input type="password" class="form-input" id="adminPassword" placeholder="Enter admin password" required>
+          <label class="form-label">Question</label>
+          <textarea id="quizQuestion" class="form-textarea" required></textarea>
         </div>
-        <button type="submit" class="login-btn">
-          <i class="fas fa-lock"></i> Login
-        </button>
-        <div class="error-message" id="errorMessage">Incorrect password. Please try again.</div>
-      </form>
-    </div>
-
-    <div class="admin-panel" id="adminPanel" style="display: none;">
-      <div class="tabs">
-        <div class="tab active" data-tab="quizzes">Manage Quizzes</div>
-        <div class="tab" data-tab="leaderboard">Leaderboard</div>
-        <div class="tab" data-tab="progress">User Progress</div>
-        <div class="tab" style="margin-left: auto;">
-          <button class="logout-btn" id="logoutBtn">
-            <i class="fas fa-sign-out-alt"></i> Logout
-          </button>
+        <div class="form-group">
+          <label class="form-label">Category</label>
+          <select id="quizCategory" class="form-select" required>
+            <option value="Mathematics">Mathematics</option>
+            <option value="Science">Science</option>
+            <option value="History">History</option>
+            <option value="Geography">Geography</option>
+          </select>
         </div>
-      </div>
-
-      <div class="tab-content active" id="quizzes-tab">
-        <h2 class="admin-title">Create New Quiz</h2>
-        <form class="quiz-form" id="quizForm">
-          <div class="form-group">
-            <label class="form-label">Question</label>
-            <textarea class="form-textarea" id="quizQuestionInput" required></textarea>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Category</label>
-            <select class="form-select" id="quizCategoryInput" required>
-              <option value="math">Mathematics</option>
-              <option value="science">Science</option>
-              <option value="ict">ICT</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Difficulty</label>
-            <select class="form-select" id="quizDifficultyInput" required>
-              <option value="easy">Easy</option>
-              <option value="medium">Medium</option>
-              <option value="hard">Hard</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Options (Mark the correct answer)</label>
-            <div id="quizOptionsContainer">
-              <div class="option-item">
-                <input type="text" class="form-input" placeholder="Option 1" required>
-                <input type="radio" name="correctOption" value="0" required>
-              </div>
-              <div class="option-item">
-                <input type="text" class="form-input" placeholder="Option 2" required>
-                <input type="radio" name="correctOption" value="1" required>
-              </div>
+        <div class="form-group">
+          <label class="form-label">Difficulty</label>
+          <select id="quizDifficulty" class="form-select" required>
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Options (Select correct answer)</label>
+          <div id="optionsContainer">
+            <div class="option-item">
+              <input type="text" class="form-input" placeholder="Option 1" required>
+              <input type="radio" name="correctAnswer" value="0" required>
             </div>
-            <button type="button" class="add-option-btn" id="addOptionBtn">
-              <i class="fas fa-plus"></i> Add Option
-            </button>
+            <div class="option-item">
+              <input type="text" class="form-input" placeholder="Option 2" required>
+              <input type="radio" name="correctAnswer" value="1">
+            </div>
+            <div class="option-item">
+              <input type="text" class="form-input" placeholder="Option 3" required>
+              <input type="radio" name="correctAnswer" value="2">
+            </div>
+            <div class="option-item">
+              <input type="text" class="form-input" placeholder="Option 4" required>
+              <input type="radio" name="correctAnswer" value="3">
+            </div>
           </div>
-          <div class="form-group">
-            <label class="form-label">Image URL (Optional)</label>
-            <input type="url" class="form-input" id="quizImageInput" placeholder="https://example.com/image.jpg">
-          </div>
-          <button type="submit" class="add-quiz-btn">
-            <i class="fas fa-plus"></i> Add Quiz
+          <button type="button" class="add-option-btn" id="addOptionBtn">
+            <i class="fas fa-plus"></i> Add Option
           </button>
-        </form>
-        <h2 class="admin-title">Existing Quizzes</h2>
-        <div class="quiz-list" id="quizList"></div>
+        </div>
+        <button type="submit" class="admin-btn"><i class="fas fa-plus"></i> Add Question</button>
+      </form>
+      <h2 class="admin-title">Delete User</h2>
+      <div class="form-group">
+        <label for="deleteUsername" class="form-label">Username</label>
+        <input type="text" id="deleteUsername" class="form-input" required>
       </div>
-
-      <div class="tab-content" id="leaderboard-tab">
-        <h2 class="admin-title">Leaderboard</h2>
-        <table class="leaderboard-table">
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>Username</th>
-              <th>Reward Points</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody id="leaderboardBody"></tbody>
-        </table>
-      </div>
-
-      <div class="tab-content" id="progress-tab">
-        <h2 class="admin-title">User Progress</h2>
-        <table class="progress-table">
-          <thead>
-            <tr>
-              <th>Username</th>
-              <th>Mathematics</th>
-              <th>Science</th>
-              <th>ICT</th>
-              <th>Improvement Areas</th>
-            </tr>
-          </thead>
-          <tbody id="progressBody"></tbody>
-        </table>
-      </div>
-    </div>
+      <button id="deleteUserBtn" class="admin-btn" style="background: var(--danger);">
+        <i class="fas fa-trash"></i> Delete User
+      </button>
+    </section>
   </main>
 
   <script>
-    // Quiz Data (same as index.html)
-    let quizData = JSON.parse(localStorage.getItem('quizData')) || {
-      math: [],
-      science: [],
-      ict: []
-    };
-
-    // User data
-    let users = JSON.parse(localStorage.getItem('users')) || [];
-    let userProgress = JSON.parse(localStorage.getItem('userProgress')) || {};
-    let currentUser = localStorage.getItem('currentUser') || null;
-    let isAdmin = localStorage.getItem('isAdmin') === 'true';
-
-    // Admin password (for demo purposes, hardcoded; should be server-side in production)
-    const ADMIN_PASSWORD = 'admin123';
-
-    // DOM Elements
-    const adminLogin = document.getElementById('adminLogin');
-    const adminPanel = document.getElementById('adminPanel');
-    const adminLoginForm = document.getElementById('adminLoginForm');
-    const adminPassword = document.getElementById('adminPassword');
-    const errorMessage = document.getElementById('errorMessage');
-    const tabs = document.querySelectorAll('.tab');
-    const tabContents = document.querySelectorAll('.tab-content');
-    const quizForm = document.getElementById('quizForm');
-    const quizQuestionInput = document.getElementById('quizQuestionInput');
-    const quizCategoryInput = document.getElementById('quizCategoryInput');
-    const quizDifficultyInput = document.getElementById('quizDifficultyInput');
-    const quizOptionsContainer = document.getElementById('quizOptionsContainer');
-    const addOptionBtn = document.getElementById('addOptionBtn');
-    const quizImageInput = document.getElementById('quizImageInput');
-    const quizList = document.getElementById('quizList');
-    const leaderboardBody = document.getElementById('leaderboardBody');
-    const progressBody = document.getElementById('progressBody');
-    const logoutBtn = document.getElementById('logoutBtn');
-
-    // Initialize
-    function init() {
-      if (isAdmin) {
-        showAdminPanel();
-      } else {
-        adminLogin.style.display = 'block';
-        adminPanel.style.display = 'none';
+    function getCookie(name) {
+      const cname = name + "=";
+      const decodedCookie = decodeURIComponent(document.cookie);
+      const ca = decodedCookie.split(';');
+      for (let c of ca) {
+        c = c.trim();
+        if (c.indexOf(cname) === 0) {
+          return c.substring(cname.length, c.length);
+        }
       }
-      setupEventListeners();
-      loadQuizList();
-      loadLeaderboard();
-      loadUserProgress();
+      return "";
     }
 
-    // Setup event listeners
-    function setupEventListeners() {
-      adminLoginForm.addEventListener('submit', handleAdminLogin);
-      logoutBtn.addEventListener('click', handleLogout);
-      tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-          tabs.forEach(t => t.classList.remove('active'));
-          tabContents.forEach(c => c.classList.remove('active'));
-          tab.classList.add('active');
-          document.getElementById(`${tab.dataset.tab}-tab`).classList.add('active');
-        });
-      });
-      addOptionBtn.addEventListener('click', addOptionField);
-      quizForm.addEventListener('submit', handleQuizSubmit);
+    function deleteCookie(name) {
+      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;";
     }
 
-    // Handle admin login
-    function handleAdminLogin(e) {
-      e.preventDefault();
-      if (adminPassword.value === ADMIN_PASSWORD) {
-        isAdmin = true;
-        localStorage.setItem('isAdmin', 'true');
-        showAdminPanel();
+    function checkLogin() {
+      const username = getCookie('username');
+      if (username) {
+        document.getElementById('adminLoginSection').classList.remove('hidden');
+        document.getElementById('logoutBtn').classList.remove('hidden');
       } else {
-        showError('Incorrect password. Please try again.');
+        window.location.href = 'quiz.html';
       }
-      adminPassword.value = '';
     }
 
-    // Show error message
-    function showError(message) {
-      errorMessage.textContent = message;
-      errorMessage.style.display = 'block';
-      setTimeout(() => {
-        errorMessage.style.display = 'none';
-      }, 3000);
-    }
+    document.getElementById('adminLoginBtn').addEventListener('click', () => {
+      const password = document.getElementById('adminPassword').value.trim();
+      if (password === 'admin123') {
+        document.getElementById('adminError').style.display = 'none';
+        document.getElementById('adminLoginSection').classList.add('hidden');
+        document.getElementById('adminPanel').classList.remove('hidden');
+      } else {
+        document.getElementById('adminError').style.display = 'block';
+      }
+    });
 
-    // Show admin panel
-    function showAdminPanel() {
-      adminLogin.style.display = 'none';
-      adminPanel.style.display = 'block';
-    }
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      deleteCookie('username');
+      localStorage.setItem('rewardPoints', '0');
+      window.location.href = 'quiz.html';
+    });
 
-    // Handle logout
-    function handleLogout() {
-      isAdmin = false;
-      localStorage.setItem('isAdmin', 'false');
-      adminLogin.style.display = 'block';
-      adminPanel.style.display = 'none';
-    }
-
-    // Add option field
-    function addOptionField() {
-      const optionCount = quizOptionsContainer.children.length;
-      if (optionCount >= 4) {
-        alert('Maximum 4 options allowed');
+    document.getElementById('addOptionBtn').addEventListener('click', () => {
+      const optionsContainer = document.getElementById('optionsContainer');
+      const optionCount = optionsContainer.children.length;
+      if (optionCount >= 6) {
+        alert('Maximum 6 options allowed');
         return;
       }
       const optionItem = document.createElement('div');
       optionItem.className = 'option-item';
       optionItem.innerHTML = `
         <input type="text" class="form-input" placeholder="Option ${optionCount + 1}" required>
-        <input type="radio" name="correctOption" value="${optionCount}" required>
+        <input type="radio" name="correctAnswer" value="${optionCount}">
         <button type="button" class="remove-option-btn">
           <i class="fas fa-trash"></i>
         </button>
       `;
-      quizOptionsContainer.appendChild(optionItem);
+      optionsContainer.appendChild(optionItem);
       optionItem.querySelector('.remove-option-btn').addEventListener('click', () => {
-        if (quizOptionsContainer.children.length > 2) {
+        if (optionsContainer.children.length > 2) {
           optionItem.remove();
         } else {
           alert('Minimum 2 options required');
         }
       });
-    }
+    });
 
-    // Handle quiz form submission
-    function handleQuizSubmit(e) {
+    document.getElementById('quizForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const question = quizQuestionInput.value.trim();
-      const category = quizCategoryInput.value;
-      const difficulty = quizDifficultyInput.value;
-      const image = quizImageInput.value.trim() || null;
-      const options = Array.from(quizOptionsContainer.querySelectorAll('input[type="text"]')).map(input => input.value.trim());
-      const correctOption = parseInt(quizOptionsContainer.querySelector('input[name="correctOption"]:checked').value);
+      alert('Question addition not implemented (requires backend).');
+    });
 
-      if (options.length < 2) {
-        alert('At least 2 options are required');
-        return;
-      }
-      if (options.some(opt => !opt)) {
-        alert('All options must be filled');
-        return;
-      }
+    document.getElementById('deleteUserBtn').addEventListener('click', async () => {
+      alert('User deletion not implemented (requires backend).');
+    });
 
-      const newQuiz = { question, options, answer: correctOption, difficulty, image };
-      quizData[category].push(newQuiz);
-      localStorage.setItem('quizData', JSON.stringify(quizData));
-
-      quizForm.reset();
-      quizOptionsContainer.innerHTML = `
-        <div class="option-item">
-          <input type="text" class="form-input" placeholder="Option 1" required>
-          <input type="radio" name="correctOption" value="0" required>
-        </div>
-        <div class="option-item">
-          <input type="text" class="form-input" placeholder="Option 2" required>
-          <input type="radio" name="correctOption" value="1" required>
-        </div>
-      `;
-      loadQuizList();
-      alert('Quiz added successfully!');
-    }
-
-    // Load quizzes
-    function loadQuizList() {
-      quizList.innerHTML = '';
-      Object.keys(quizData).forEach(category => {
-        quizData[category].forEach((quiz, index) => {
-          const quizCard = document.createElement('div');
-          quizCard.className = 'quiz-card';
-          quizCard.innerHTML = `
-            <div class="quiz-card-header">
-              <div class="quiz-card-title">${quiz.question}</div>
-              <div class="quiz-card-meta">
-                <span>${getCategoryName(category)}</span>
-                <span>${quiz.difficulty.charAt(0).toUpperCase() + quiz.difficulty.slice(1)}</span>
-              </div>
-            </div>
-            <div class="quiz-card-body">
-              <div class="quiz-card-actions">
-                <button class="quiz-card-btn edit" data-category="${category}" data-index="${index}">
-                  <i class="fas fa-edit"></i> Edit
-                </button>
-                <button class="quiz-card-btn delete" data-category="${category}" data-index="${index}">
-                  <i class="fas fa-trash"></i> Delete
-                </button>
-              </div>
-            </div>
-          `;
-          quizList.appendChild(quizCard);
-        });
-      });
-
-      quizList.querySelectorAll('.quiz-card-btn.edit').forEach(btn => {
-        btn.addEventListener('click', () => editQuiz(btn.dataset.category, btn.dataset.index));
-      });
-      quizList.querySelectorAll('.quiz-card-btn.delete').forEach(btn => {
-        btn.addEventListener('click', () => deleteQuiz(btn.dataset.category, btn.dataset.index));
-      });
-    }
-
-    // Edit quiz
-    function editQuiz(category, index) {
-      const quiz = quizData[category][index];
-      quizQuestionInput.value = quiz.question;
-      quizCategoryInput.value = category;
-      quizDifficultyInput.value = quiz.difficulty;
-      quizImageInput.value = quiz.image || '';
-      quizOptionsContainer.innerHTML = '';
-      quiz.options.forEach((option, i) => {
-        const optionItem = document.createElement('div');
-        optionItem.className = 'option-item';
-        optionItem.innerHTML = `
-          <input type="text" class="form-input" value="${option}" placeholder="Option ${i + 1}" required>
-          <input type="radio" name="correctOption" value="${i}" ${i === quiz.answer ? 'checked' : ''} required>
-          <button type="button" class="remove-option-btn">
-            <i class="fas fa-trash"></i>
-          </button>
-        `;
-        quizOptionsContainer.appendChild(optionItem);
-      });
-
-      quizForm.onsubmit = (e) => {
-        e.preventDefault();
-        const updatedQuiz = {
-          question: quizQuestionInput.value.trim(),
-          options: Array.from(quizOptionsContainer.querySelectorAll('input[type="text"]')).map(input => input.value.trim()),
-          answer: parseInt(quizOptionsContainer.querySelector('input[name="correctOption"]:checked').value),
-          difficulty: quizDifficultyInput.value,
-          image: quizImageInput.value.trim() || null
-        };
-        quizData[category][index] = updatedQuiz;
-        localStorage.setItem('quizData', JSON.stringify(quizData));
-        quizForm.reset();
-        quizForm.onsubmit = handleQuizSubmit;
-        quizOptionsContainer.innerHTML = `
-          <div class="option-item">
-            <input type="text" class="form-input" placeholder="Option 1" required>
-            <input type="radio" name="correctOption" value="0" required>
-          </div>
-          <div class="option-item">
-            <input type="text" class="form-input" placeholder="Option 2" required>
-            <input type="radio" name="correctOption" value="1" required>
-          </div>
-        `;
-        loadQuizList();
-        alert('Quiz updated successfully!');
-      };
-
-      quizOptionsContainer.querySelectorAll('.remove-option-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          if (quizOptionsContainer.children.length > 2) {
-            btn.parentElement.remove();
-          } else {
-            alert('Minimum 2 options required');
-          }
-        });
-      });
-    }
-
-    // Delete quiz
-    function deleteQuiz(category, index) {
-      if (confirm('Are you sure you want to delete this quiz?')) {
-        quizData[category].splice(index, 1);
-        localStorage.setItem('quizData', JSON.stringify(quizData));
-        loadQuizList();
-        alert('Quiz deleted successfully!');
-      }
-    }
-
-    // Load leaderboard
-    function loadLeaderboard() {
-      users.sort((a, b) => b.rewardPoints - a.rewardPoints);
-      leaderboardBody.innerHTML = '';
-      users.forEach((user, index) => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td>${index + 1}</td>
-          <td>${user.username}</td>
-          <td>${user.rewardPoints}</td>
-          <td>
-            <button class="delete-user-btn" data-username="${user.username}">
-              <i class="fas fa-trash"></i> Delete
-            </button>
-          </td>
-        `;
-        leaderboardBody.appendChild(row);
-      });
-
-      // Add event listeners for delete buttons
-      leaderboardBody.querySelectorAll('.delete-user-btn').forEach(btn => {
-        btn.addEventListener('click', () => deleteUser(btn.dataset.username));
-      });
-    }
-
-    // Delete user
-    function deleteUser(username) {
-      if (confirm(`Are you sure you want to delete user "${username}"?`)) {
-        // Remove from users array
-        users = users.filter(user => user.username !== username);
-        localStorage.setItem('users', JSON.stringify(users));
-
-        // Remove from userProgress
-        delete userProgress[username];
-        localStorage.setItem('userProgress', JSON.stringify(userProgress));
-
-        // Clear currentUser if deleted
-        if (currentUser === username) {
-          localStorage.removeItem('currentUser');
-          currentUser = null;
-        }
-
-        // Refresh tables
-        loadLeaderboard();
-        loadUserProgress();
-        alert(`User "${username}" deleted successfully!`);
-      }
-    }
-
-    // Load user progress
-    function loadUserProgress() {
-      progressBody.innerHTML = '';
-      Object.keys(userProgress).forEach(username => {
-        const progress = userProgress[username];
-        const mathPercent = progress.math.total ? ((progress.math.correct / progress.math.total) * 100).toFixed(1) : 0;
-        const sciencePercent = progress.science.total ? ((progress.science.correct / progress.science.total) * 100).toFixed(1) : 0;
-        const ictPercent = progress.ict.total ? ((progress.ict.correct / progress.ict.total) * 100).toFixed(1) : 0;
-        const weakest = Math.min(mathPercent, sciencePercent, ictPercent);
-        let improvement = '';
-        if (weakest === mathPercent && mathPercent < 70) improvement = 'Mathematics';
-        else if (weakest === sciencePercent && sciencePercent < 70) improvement = 'Science';
-        else if (weakest === ictPercent && ictPercent < 70) improvement = 'ICT';
-        else improvement = 'None';
-        const row = document.createElement('tr');
-        row.innerHTML = `
-          <td>${username}</td>
-          <td>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: ${mathPercent}%"></div>
-            </div>
-            ${mathPercent}% (${progress.math.correct}/${progress.math.total})
-          </td>
-          <td>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: ${sciencePercent}%"></div>
-            </div>
-            ${sciencePercent}% (${progress.science.correct}/${progress.science.total})
-          </td>
-          <td>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: ${ictPercent}%"></div>
-            </div>
-            ${ictPercent}% (${progress.ict.correct}/${progress.ict.total})
-          </td>
-          <td>${improvement}</td>
-        `;
-        progressBody.appendChild(row);
-      });
-    }
-
-    // Get category name
-    function getCategoryName(category) {
-      const names = { math: 'Mathematics', science: 'Science', ict: 'ICT' };
-      return names[category] || category;
-    }
-
-    // Initialize
-    init();
+    checkLogin();
   </script>
 </body>
 </html>

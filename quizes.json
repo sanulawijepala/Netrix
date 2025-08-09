@@ -1,0 +1,62 @@
+[
+  {
+    "category": "Mathematics",
+    "difficulty": "Medium",
+    "question": "What is the value of 2 + 2 × 2?",
+    "options": [
+      { "text": "6", "isCorrect": true },
+      { "text": "8", "isCorrect": false },
+      { "text": "4", "isCorrect": false },
+      { "text": "10", "isCorrect": false }
+    ],
+    "rewardPoints": 10
+  },
+  {
+    "category": "Science",
+    "difficulty": "Easy",
+    "question": "What gas do plants use for photosynthesis?",
+    "options": [
+      { "text": "Oxygen", "isCorrect": false },
+      { "text": "Carbon Dioxide", "isCorrect": true },
+      { "text": "Nitrogen", "isCorrect": false },
+      { "text": "Helium", "isCorrect": false }
+    ],
+    "rewardPoints": 10
+  },
+  {
+    "category": "History",
+    "difficulty": "Hard",
+    "question": "Who was the first president of the United States?",
+    "options": [
+      { "text": "Abraham Lincoln", "isCorrect": false },
+      { "text": "Thomas Jefferson", "isCorrect": false },
+      { "text": "George Washington", "isCorrect": true },
+      { "text": "John Adams", "isCorrect": false }
+    ],
+    "rewardPoints": 15
+  },
+  {
+    "category": "Geography",
+    "difficulty": "Medium",
+    "question": "What is the capital of France?",
+    "options": [
+      { "text": "Paris", "isCorrect": true },
+      { "text": "London", "isCorrect": false },
+      { "text": "Berlin", "isCorrect": false },
+      { "text": "Madrid", "isCorrect": false }
+    ],
+    "rewardPoints": 10
+  },
+  {
+    "category": "Mathematics",
+    "difficulty": "Hard",
+    "question": "What is the derivative of x²?",
+    "options": [
+      { "text": "2x", "isCorrect": true },
+      { "text": "x²", "isCorrect": false },
+      { "text": "2", "isCorrect": false },
+      { "text": "x", "isCorrect": false }
+    ],
+    "rewardPoints": 15
+  }
+]

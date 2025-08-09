@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resource Library | EduSyncHub</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #6C63FF;
+      --secondary: #4D44DB;
+      --accent: #FF6584;
+      --dark: #2D3748;
+      --light: #F7FAFC;
+      --success: #4CAF50;
+      --danger: #F44336;
+      --warning: #FFC107;
+      --info: #2196F3;
+      --math: #4CAF50;
+      --science: #2196F3;
+      --ict: #9C27B0;
+      --english: #FF9800;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    body {
+      background-color: #f5f7fa;
+      color: var(--dark);
+    }
+    
+    /* Header */
+    .header {
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+    }
+    
+    .logo-text {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+    
+    .nav-link {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 600;
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .nav-link:hover {
+      color: var(--primary);
+    }
+    
+    .nav-link i {
+      font-size: 0.9rem;
+    }
+    
+    /* Main Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+    
+    /* Login Modal */
+    .login-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    
+    .login-modal.show {
+      opacity: 1;
+      pointer-events: all;
+    }
+    
+    .login-content {
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      transform: translateY(20px);
+      transition: transform 0.3s;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+      position: relative;
+    }
+    
+    .login-modal.show .login-content {
+      transform: translateY(0);
+    }
+    
+    .login-content h2 {
+      margin-bottom: 20px;
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      text-align: left;
+    }
+    
+    .form-label {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    
+    .form-input {
+      padding: 12px 15px;
+      border-radius: 8px;
+      border: 2px solid #eee;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+    
+    .form-input:focus {
+      border-color: var(--primary);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+    }
+    
+    .login-btn {
+      padding: 12px;
+      border-radius: 8px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 10px;
+    }
+    
+    .login-btn:hover {
+      background: var(--secondary);
+    }
+    
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: var(--dark);
+    }
+    
+    /* Page Header */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    
+    .page-title {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .view-toggle {
+      display: flex;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    
+    .view-btn {
+      padding: 8px 15px;
+      border: none;
+      background: white;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .view-btn.active {
+      background: var(--primary);
+      color: white;
+    }
+    
+    /* Resource Grid */
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    
+    .resource-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: all 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .resource-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    
+    .resource-thumbnail {
+      height: 160px;
+      background: #eee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--dark);
+      font-size: 3rem;
+      position: relative;
+    }
+    
+    .resource-type {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: white;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .resource-body {
+      padding: 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .resource-category {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: white;
+    }
+    
+    .category-math {
+      background-color: var(--math);
+    }
+    
+    .category-science {
+      background-color: var(--science);
+    }
+    
+    .category-ict {
+      background-color: var(--ict);
+    }
+    
+    .category-english {
+      background-color: var(--english);
+    }
+    
+    .resource-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    
+    .resource-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: #666;
+      margin-bottom: 15px;
+    }
+    
+    .resource-desc {
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+      color: #555;
+      flex-grow: 1;
+    }
+    
+    .resource-actions {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .action-btn {
+      flex-grow: 1;
+      padding: 8px;
+      border-radius: 6px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      font-size: 0.8rem;
+    }
+    
+    .view-btn {
+      background: var(--primary);
+      color: white;
+    }
+    
+    .download-btn {
+      background: var(--success);
+      color: white;
+    }
+    
+    .edit-btn {
+      background: var(--info);
+      color: white;
+    }
+    
+    .delete-btn {
+      background: var(--danger);
+      color: white;
+    }
+    
+    .action-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+    
+    /* Admin Panel */
+    .admin-panel {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      margin-bottom: 30px;
+    }
+    
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .admin-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    
+    .resource-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    
+    .form-group.full-width {
+      grid-column: span 2;
+    }
+    
+    .form-textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+    
+    .file-upload {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      border: 2px dashed #ddd;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-align: center;
+    }
+    
+    .file-upload:hover {
+      border-color: var(--primary);
+      background: rgba(108, 99, 255, 0.05);
+    }
+    
+    .file-upload i {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    
+    .file-input {
+      display: none;
+    }
+    
+    .submit-btn {
+      grid-column: span 2;
+      padding: 15px;
+      border-radius: 8px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 1rem;
+    }
+    
+    .submit-btn:hover {
+      background: var(--secondary);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
+    }
+    
+    /* Filter Bar */
+    .filter-bar {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+    
+    .filter-select {
+      padding: 10px 15px;
+      border-radius: 8px;
+      border: 2px solid #eee;
+      background: white;
+      font-size: 0.9rem;
+      min-width: 150px;
+    }
+    
+    .filter-select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    
+    .search-bar {
+      flex-grow: 1;
+      max-width: 400px;
+      position: relative;
+    }
+    
+    .search-input {
+      width: 100%;
+      padding: 10px 15px 10px 40px;
+      border-radius: 8px;
+      border: 2px solid #eee;
+      font-size: 0.9rem;
+    }
+    
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    
+    .search-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #999;
+    }
+    
+    /* Resource List View */
+    .resource-list {
+      display: none;
+    }
+    
+    .resource-list.active {
+      display: block;
+    }
+    
+    .resource-item {
+      background: white;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      transition: all 0.3s;
+    }
+    
+    .resource-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .resource-icon {
+      width: 60px;
+      height: 60px;
+      background: #eee;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    
+    .resource-content {
+      flex-grow: 1;
+    }
+    
+    .resource-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;
+    }
+    
+    .resource-list-actions {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .list-action-btn {
+      background: none;
+      border: none;
+      color: var(--dark);
+      cursor: pointer;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+    
+    .list-action-btn:hover {
+      color: var(--primary);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .resource-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .resource-form {
+        grid-template-columns: 1fr;
+      }
+      
+      .form-group.full-width {
+        grid-column: span 1;
+      }
+      
+      .submit-btn {
+        grid-column: span 1;
+      }
+      
+      .resource-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+      }
+      
+      .resource-header {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .resource-list-actions {
+        justify-content: center;
+      }
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <div class="logo-text">EduSyncHub</div>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">
+          <i class="fas fa-home"></i> Home
+        </a>
+        <a href="quiz.html" class="nav-link">
+          <i class="fas fa-gamepad"></i> Quiz
+        </a>
+        <a href="library.html" class="nav-link active">
+          <i class="fas fa-book"></i> Resources
+        </a>
+        <a href="chat.html" class="nav-link">
+          <i class="fas fa-comments"></i> Chat
+        </a>
+        <button class="nav-link" id="adminLoginBtn">
+          <i class="fas fa-user-shield"></i> Admin
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Login Modal -->
+  <div class="login-modal" id="loginModal">
+    <div class="login-content">
+      <button class="close-btn" id="closeLoginBtn">
+        <i class="fas fa-times"></i>
+      </button>
+      <h2>Admin Login</h2>
+      <form class="login-form" id="loginForm">
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-input" id="passwordInput" placeholder="Enter admin password" required>
+        </div>
+        <button type="submit" class="login-btn">Login</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="container">
+    <!-- Page Header -->
+    <div class="page-header">
+      <h1 class="page-title">Resource Library</h1>
+      <div class="view-toggle">
+        <button class="view-btn active" data-view="grid">
+          <i class="fas fa-th-large"></i> Grid
+        </button>
+        <button class="view-btn" data-view="list">
+          <i class="fas fa-list"></i> List
+        </button>
+      </div>
+    </div>
+    
+    <!-- Admin Panel (Hidden by default) -->
+    <div class="admin-panel" id="adminPanel" style="display: none;">
+      <div class="admin-header">
+        <h2 class="admin-title">Add New Resource</h2>
+      </div>
+      <form class="resource-form" id="resourceForm" enctype="multipart/form-data">
+        <div class="form-group">
+          <label>Resource Type</label>
+          <select class="form-input" id="resourceType" required>
+            <option value="">Select type</option>
+            <option value="past-paper">Past Paper</option>
+            <option value="lecture">Lecture Notes</option>
+            <option value="video">Video Lecture</option>
+            <option value="ebook">E-Book</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label>Subject/Category</label>
+          <select class="form-input" id="resourceCategory" required>
+            <option value="">Select category</option>
+            <option value="math">Mathematics</option>
+            <option value="science">Science</option>
+            <option value="ict">ICT</option>
+            <option value="english">English</option>
+          </select>
+        </div>
+        
+        <div class="form-group full-width">
+          <label>Title</label>
+          <input type="text" class="form-input" id="resourceTitle" placeholder="Enter resource title" required>
+        </div>
+        
+        <div class="form-group full-width">
+          <label>Description</label>
+          <textarea class="form-input form-textarea" id="resourceDesc" placeholder="Enter resource description"></textarea>
+        </div>
+        
+        <div class="form-group full-width">
+          <label>Upload File</label>
+          <label class="file-upload" id="fileUploadLabel">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <span>Click to upload or drag and drop</span>
+            <span id="fileName">No file selected</span>
+            <input type="file" class="file-input" id="resourceFile" accept=".pdf,.mp4,.doc,.docx" required>
+          </label>
+        </div>
+        
+        <button type="submit" class="submit-btn">
+          <i class="fas fa-plus"></i> Add Resource
+        </button>
+      </form>
+    </div>
+    
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+      <select class="filter-select" id="categoryFilter">
+        <option value="">All Categories</option>
+        <option value="math">Mathematics</option>
+        <option value="science">Science</option>
+        <option value="ict">ICT</option>
+        <option value="english">English</option>
+      </select>
+      
+      <select class="filter-select" id="typeFilter">
+        <option value="">All Types</option>
+        <option value="past-paper">Past Papers</option>
+        <option value="lecture">Lecture Notes</option>
+        <option value="video">Video Lectures</option>
+        <option value="ebook">E-Books</option>
+      </select>
+      
+      <div class="search-bar">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search resources...">
+      </div>
+    </div>
+    
+    <!-- Resource Grid View -->
+    <div class="resource-grid" id="resourceGrid">
+      <!-- Resources will be loaded here -->
+    </div>
+    
+    <!-- Resource List View -->
+    <div class="resource-list" id="resourceList">
+      <!-- Resources will be loaded here in list view -->
+    </div>
+  </main>
+
+  <script>
+    // Resource Data (with actual file paths)
+    let resources = JSON.parse(localStorage.getItem('resources')) || [
+      {
+        id: '1',
+        title: '2023 Mathematics Past Paper',
+        description: 'Final exam paper for grade 10 mathematics with marking scheme',
+        category: 'math',
+        type: 'past-paper',
+        file: '/uploads/math-past-paper-2023.pdf',
+        date: '2023-11-15',
+        downloads: 124
+      },
+      {
+        id: '2',
+        title: 'Chemistry Lecture Notes',
+        description: 'Complete notes for organic chemistry unit',
+        category: 'science',
+        type: 'lecture',
+        file: '/uploads/chemistry-notes.pdf',
+        date: '2023-10-28',
+        downloads: 87
+      },
+      {
+        id: '3',
+        title: 'Python Programming Basics',
+        description: 'Video lectures covering Python fundamentals',
+        category: 'ict',
+        type: 'video',
+        file: '/uploads/python-basics.mp4',
+        date: '2023-09-10',
+        downloads: 215
+      },
+      {
+        id: '4',
+        title: 'English Literature Guide',
+        description: 'Comprehensive guide for grade 11 literature',
+        category: 'english',
+        type: 'ebook',
+        file: '/uploads/literature-guide.pdf',
+        date: '2023-11-05',
+        downloads: 56
+      },
+      {
+        id: '5',
+        title: 'Physics Formula Sheet',
+        description: 'All important formulas for grade 12 physics',
+        category: 'science',
+        type: 'lecture',
+        file: '/uploads/physics-formulas.pdf',
+        date: '2023-10-15',
+        downloads: 192
+      }
+    ];
+
+    // DOM Elements
+    const adminLoginBtn = document.getElementById('adminLoginBtn');
+    const loginModal = document.getElementById('loginModal');
+    const closeLoginBtn = document.getElementById('closeLoginBtn');
+    const loginForm = document.getElementById('loginForm');
+    const passwordInput = document.getElementById('passwordInput');
+    const adminPanel = document.getElementById('adminPanel');
+    const resourceForm = document.getElementById('resourceForm');
+    const fileUploadLabel = document.getElementById('fileUploadLabel');
+    const fileName = document.getElementById('fileName');
+    const resourceFile = document.getElementById('resourceFile');
+    const resourceGrid = document.getElementById('resourceGrid');
+    const resourceList = document.getElementById('resourceList');
+    const viewBtns = document.querySelectorAll('.view-btn');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const typeFilter = document.getElementById('typeFilter');
+    const searchInput = document.getElementById('searchInput');
+    
+    // Current state
+    let isAdmin = false;
+    let currentView = 'grid';
+    
+    // Initialize the page
+    function init() {
+      loadResources();
+      setupEventListeners();
+    }
+    
+    // Load resources into the UI
+    function loadResources() {
+      resourceGrid.innerHTML = '';
+      resourceList.innerHTML = '';
+      
+      const category = categoryFilter.value;
+      const type = typeFilter.value;
+      const searchTerm = searchInput.value.toLowerCase();
+      
+      const filteredResources = resources.filter(resource => {
+        return (!category || resource.category === category) &&
+               (!type || resource.type === type) &&
+               (!searchTerm || 
+                resource.title.toLowerCase().includes(searchTerm) || 
+                resource.description.toLowerCase().includes(searchTerm));
+      });
+      
+      if (currentView === 'grid') {
+        loadGridView(filteredResources);
+        resourceGrid.style.display = 'grid';
+        resourceList.style.display = 'none';
+      } else {
+        loadListView(filteredResources);
+        resourceGrid.style.display = 'none';
+        resourceList.style.display = 'block';
+      }
+    }
+    
+    // Load resources in grid view
+    function loadGridView(resources) {
+      resources.forEach(resource => {
+        const resourceEl = document.createElement('div');
+        resourceEl.className = 'resource-card';
+        resourceEl.innerHTML = `
+          <div class="resource-thumbnail">
+            ${getResourceIcon(resource.type)}
+            <div class="resource-type">${formatType(resource.type)}</div>
+          </div>
+          <div class="resource-body">
+            <span class="resource-category category-${resource.category}">${formatCategory(resource.category)}</span>
+            <h3 class="resource-title">${resource.title}</h3>
+            <div class="resource-meta">
+              <span>${formatDate(resource.date)}</span>
+              <span>${resource.downloads} downloads</span>
+            </div>
+            <p class="resource-desc">${resource.description}</p>
+            <div class="resource-actions">
+              <button class="action-btn view-btn" data-id="${resource.id}">
+                <i class="fas fa-eye"></i> View
+              </button>
+              <a href="${resource.file}" class="action-btn download-btn" data-id="${resource.id}" download>
+                <i class="fas fa-download"></i> Download
+              </a>
+              ${isAdmin ? `
+                <button class="action-btn edit-btn" data-id="${resource.id}">
+                  <i class="fas fa-edit"></i> Edit
+                </button>
+                <button class="action-btn delete-btn" data-id="${resource.id}">
+                  <i class="fas fa-trash"></i> Delete
+                </button>
+              ` : ''}
+            </div>
+          </div>
+        `;
+        
+        resourceGrid.appendChild(resourceEl);
+      });
+      
+      setupResourceEventListeners();
+    }
+    
+    // Load resources in list view
+    function loadListView(resources) {
+      resources.forEach(resource => {
+        const resourceEl = document.createElement('div');
+        resourceEl.className = 'resource-item';
+        resourceEl.innerHTML = `
+          <div class="resource-icon">
+            ${getResourceIcon(resource.type)}
+          </div>
+          <div class="resource-content">
+            <div class="resource-header">
+              <div>
+                <span class="resource-category category-${resource.category}">${formatCategory(resource.category)}</span>
+                <h3 class="resource-title">${resource.title}</h3>
+              </div>
+              <div class="resource-list-actions">
+                <button class="list-action-btn view-resource" data-id="${resource.id}" title="View">
+                  <i class="fas fa-eye"></i>
+                </button>
+                <a href="${resource.file}" class="list-action-btn download-resource" data-id="${resource.id}" title="Download" download>
+                  <i class="fas fa-download"></i>
+                </a>
+                ${isAdmin ? `
+                  <button class="list-action-btn edit-resource" data-id="${resource.id}" title="Edit">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="list-action-btn delete-resource" data-id="${resource.id}" title="Delete">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                ` : ''}
+              </div>
+            </div>
+            <p class="resource-desc">${resource.description}</p>
+            <div class="resource-meta">
+              <span>${formatType(resource.type)}</span>
+              <span>${formatDate(resource.date)}</span>
+              <span>${resource.downloads} downloads</span>
+            </div>
+          </div>
+        `;
+        
+        resourceList.appendChild(resourceEl);
+      });
+      
+      setupResourceEventListeners();
+    }
+    
+    // Setup resource event listeners
+    function setupResourceEventListeners() {
+      document.querySelectorAll('.view-resource, .view-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const id = e.currentTarget.dataset.id;
+          viewResource(id);
+        });
+      });
+      
+      document.querySelectorAll('.download-resource, .download-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const id = e.currentTarget.dataset.id;
+          downloadResource(id);
+        });
+      });
+      
+      if (isAdmin) {
+        document.querySelectorAll('.edit-resource, .edit-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const id = e.currentTarget.dataset.id;
+            editResource(id);
+          });
+        });
+        
+        document.querySelectorAll('.delete-resource, .delete-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const id = e.currentTarget.dataset.id;
+            deleteResource(id);
+          });
+        });
+      }
+    }
+    
+    // Resource actions
+    function viewResource(id) {
+      const resource = resources.find(r => r.id === id);
+      if (!resource) return;
+      
+      // Open the resource in a new window/tab
+      window.open(resource.file, '_blank');
+    }
+    
+    function downloadResource(id) {
+      const resource = resources.find(r => r.id === id);
+      if (!resource) return;
+      
+      // Increment download count
+      resource.downloads++;
+      localStorage.setItem('resources', JSON.stringify(resources));
+      
+      // The actual download is handled by the <a> tag with download attribute
+      loadResources();
+    }
+    
+    function editResource(id) {
+      const resource = resources.find(r => r.id === id);
+      if (!resource) return;
+      
+      // Populate form with existing resource data
+      document.getElementById('resourceType').value = resource.type;
+      document.getElementById('resourceCategory').value = resource.category;
+      document.getElementById('resourceTitle').value = resource.title;
+      document.getElementById('resourceDesc').value = resource.description;
+      fileName.textContent = resource.file.split('/').pop();
+      
+      // Change form submission to update existing resource
+      resourceForm.onsubmit = async (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData();
+        formData.append('id', id);
+        formData.append('type', document.getElementById('resourceType').value);
+        formData.append('category', document.getElementById('resourceCategory').value);
+        formData.append('title', document.getElementById('resourceTitle').value);
+        formData.append('description', document.getElementById('resourceDesc').value);
+        if (resourceFile.files.length > 0) {
+          formData.append('file', resourceFile.files[0]);
+        }
+        
+        try {
+          const response = await fetch('/api/resources/update', {
+            method: 'POST',
+            body: formData
+          });
+          
+          if (response.ok) {
+            const updatedResource = await response.json();
+            resources = resources.map(r => r.id === id ? {
+              ...r,
+              title: updatedResource.title,
+              description: updatedResource.description,
+              category: updatedResource.category,
+              type: updatedResource.type,
+              file: updatedResource.file,
+              date: updatedResource.date
+            } : r);
+            
+            localStorage.setItem('resources', JSON.stringify(resources));
+            resourceForm.reset();
+            fileName.textContent = 'No file selected';
+            resourceForm.onsubmit = handleResourceSubmit; // Reset to default submit handler
+            loadResources();
+            alert('Resource updated successfully!');
+          } else {
+            alert('Failed to update resource');
+          }
+        } catch (error) {
+          console.error('Error updating resource:', error);
+          alert('Error updating resource');
+        }
+      };
+    }
+    
+    function deleteResource(id) {
+      if (confirm('Are you sure you want to delete this resource?')) {
+        fetch(`/api/resources/delete/${id}`, {
+          method: 'DELETE'
+        })
+          .then(response => {
+            if (response.ok) {
+              resources = resources.filter(r => r.id !== id);
+              localStorage.setItem('resources', JSON.stringify(resources));
+              loadResources();
+              alert('Resource deleted successfully!');
+            } else {
+              alert('Failed to delete resource');
+            }
+          })
+          .catch(error => {
+            console.error('Error deleting resource:', error);
+            alert('Error deleting resource');
+          });
+      }
+    }
+    
+    // Helper functions
+    function getResourceIcon(type) {
+      const icons = {
+        'past-paper': '<i class="fas fa-file-alt"></i>',
+        'lecture': '<i class="fas fa-file-pdf"></i>',
+        'video': '<i class="fas fa-video"></i>',
+        'ebook': '<i class="fas fa-book"></i>'
+      };
+      return icons[type] || '<i class="fas fa-file"></i>';
+    }
+    
+    function formatType(type) {
+      const types = {
+        'past-paper': 'Past Paper',
+        'lecture': 'Lecture Notes',
+        'video': 'Video Lecture',
+        'ebook': 'E-Book'
+      };
+      return types[type] || type;
+    }
+    
+    function formatCategory(category) {
+      const categories = {
+        'math': 'Mathematics',
+        'science': 'Science',
+        'ict': 'ICT',
+        'english': 'English'
+      };
+      return categories[category] || category;
+    }
+    
+    function formatDate(dateString) {
+      const date = new Date(dateString);
+      return date.toLocaleDateString();
+    }
+    
+    // Handle file upload
+    async function handleResourceSubmit(e) {
+      e.preventDefault();
+      
+      // Validate file
+      if (!resourceFile.files.length) {
+        alert('Please select a file to upload');
+        return;
+      }
+      
+      const file = resourceFile.files[0];
+      const maxSize = 100 * 1024 * 1024; // 100MB
+      if (file.size > maxSize) {
+        alert('File size exceeds 100MB limit');
+        return;
+      }
+      
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('title', document.getElementById('resourceTitle').value);
+      formData.append('description', document.getElementById('resourceDesc').value);
+      formData.append('category', document.getElementById('resourceCategory').value);
+      formData.append('type', document.getElementById('resourceType').value);
+      
+      try {
+        const response = await fetch('/api/resources/upload', {
+          method: 'POST',
+          body: formData
+        });
+        
+        if (response.ok) {
+          const newResource = await response.json();
+          resources.unshift({
+            id: newResource.id,
+            title: newResource.title,
+            description: newResource.description,
+            category: newResource.category,
+            type: newResource.type,
+            file: newResource.file,
+            date: newResource.date,
+            downloads: 0
+          });
+          
+          localStorage.setItem('resources', JSON.stringify(resources));
+          resourceForm.reset();
+          fileName.textContent = 'No file selected';
+          loadResources();
+          alert('Resource added successfully!');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          alert('Failed to upload resource');
+        }
+      } catch (error) {
+        console.error('Error uploading resource:', error);
+        alert('Error uploading resource');
+      }
+    }
+    
+    // Setup event listeners
+    function setupEventListeners() {
+      adminLoginBtn.addEventListener('click', () => {
+        loginModal.classList.add('show');
+      });
+      
+      closeLoginBtn.addEventListener('click', () => {
+        loginModal.classList.remove('show');
+      });
+      
+      loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const password = passwordInput.value;
+        
+        // In a real app, this would verify against a server
+        if (password === 'admin123') {
+          isAdmin = true;
+          adminPanel.style.display = 'block';
+          loginModal.classList.remove('show');
+          passwordInput.value = '';
+          loadResources();
+        } else {
+          alert('Incorrect password. Please try again.');
+        }
+      });
+      
+      viewBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          viewBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentView = btn.dataset.view;
+          loadResources();
+        });
+      });
+      
+      resourceFile.addEventListener('change', () => {
+        if (resourceFile.files.length > 0) {
+          fileName.textContent = resourceFile.files[0].name;
+        } else {
+          fileName.textContent = 'No file selected';
+        }
+      });
+      
+      resourceForm.addEventListener('submit', handleResourceSubmit);
+      
+      categoryFilter.addEventListener('change', loadResources);
+      typeFilter.addEventListener('change', loadResources);
+      searchInput.addEventListener('input', loadResources);
+    }
+    
+    // Initialize the page
+    init();
+  </script>
+</body>
+</html>

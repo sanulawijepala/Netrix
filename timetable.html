@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudySmart Timetable Maker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-light: #93c5fd;
+            --primary-dark: #1d4ed8;
+            --secondary: #1e293b;
+            --accent: #60a5fa;
+            --light: #f8fafc;
+            --dark: #0f172a;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --radius: 12px;
+            --shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --transition: all 0.2s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 2.5rem 1rem;
+            text-align: center;
+            border-radius: 0 0 var(--radius) var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::after {
+            content: "";
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+
+        .app-description {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--primary);
+        }
+
+        .app-description h2 {
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            font-size: 1.4rem;
+        }
+
+        .app-description p {
+            color: #475569;
+        }
+
+        .app-container {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .input-section {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .input-section h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--secondary);
+            font-size: 0.95rem;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: var(--light);
+            transition: var(--transition);
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .time-slots {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .time-slot {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .time-slot input {
+            flex: 1;
+        }
+
+        .remove-slot {
+            background: var(--danger);
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .remove-slot:hover {
+            background: #dc2626;
+        }
+
+        .add-slot {
+            background: var(--success);
+            margin-bottom: 1rem;
+        }
+
+        .add-slot:hover {
+            background: #0d9488;
+        }
+
+        .timetable-section {
+            flex: 2;
+            min-width: 300px;
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .timetable-section h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        #timetable-container {
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #timetable-container p {
+            color: #64748b;
+            text-align: center;
+        }
+
+        #timetable-to-export {
+            background: white;
+            border-radius: var(--radius);
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        #timetable-to-export h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-bottom: 1rem;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) td {
+            background: #f8fafc;
+        }
+
+        .subject-cell {
+            background: #dbeafe;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        .break-cell {
+            background: #fef3c7;
+            color: #92400e;
+            font-weight: 500;
+        }
+
+        .empty-cell {
+            background: #f8fafc;
+            color: #cbd5e1;
+        }
+
+        .actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .print-btn {
+            background: var(--secondary);
+        }
+
+        .print-btn:hover {
+            background: #334155;
+        }
+
+        #save-btn {
+            background: var(--accent);
+        }
+
+        #save-btn:hover {
+            background: #3b82f6;
+        }
+
+        #export-status {
+            text-align: center;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--primary);
+        }
+
+        .spinner {
+            display: none;
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(59, 130, 246, 0.2);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Loading overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(4px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .loading-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .loading-content {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: var(--shadow);
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(59, 130, 246, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            margin: 0 auto 1.5rem;
+            animation: spin 1s linear infinite;
+        }
+
+        .loading-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .loading-subtext {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow: auto;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--danger);
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            justify-content: center;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .app-container {
+                flex-direction: column;
+            }
+            
+            .input-section, .timetable-section {
+                width: 100%;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media print {
+            .no-print {
+                display: none;
+            }
+            
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .timetable-section {
+                box-shadow: none;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Generating Your Timetable</div>
+            <div class="loading-subtext">Please wait while we create your optimal schedule...</div>
+        </div>
+    </div>
+
+    <header>
+        <div class="container">
+            <h1>StudySmart Timetable Maker</h1>
+            <p class="subtitle">Organize your academic schedule for maximum productivity</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="app-description">
+            <h2>✨ Create Your Perfect Study Schedule</h2>
+            <p>This timetable maker helps you organize your study sessions, classes, and breaks effectively. Simply input your subjects, available time slots, and preferences to generate a personalized timetable.</p>
+        </div>
+
+        <div class="app-container">
+            <div class="input-section no-print">
+                <h2>📝 Create Your Timetable</h2>
+                
+                <div class="form-group">
+                    <label for="student-name">Your Name</label>
+                    <input type="text" id="student-name" placeholder="Enter your name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="week-start">Week Starting On</label>
+                    <select id="week-start">
+                        <option value="Monday">Monday</option>
+                        <option value="Sunday">Sunday</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Available Time Slots</label>
+                    <div class="time-slots" id="time-slots">
+                        <div class="time-slot">
+                            <input type="time" class="start-time" value="08:00">
+                            <span>to</span>
+                            <input type="time" class="end-time" value="16:00">
+                            <button class="remove-slot" onclick="removeTimeSlot(this)">×</button>
+                        </div>
+                    </div>
+                    <button class="add-slot" onclick="addTimeSlot()">+ Add Time Slot</button>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subjects">Subjects/Courses (comma separated)</label>
+                    <textarea id="subjects" placeholder="e.g., Mathematics, Science, English, History"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="break-duration">Break Duration (minutes)</label>
+                    <input type="number" id="break-duration" min="5" max="60" value="15">
+                </div>
+                
+                <div class="form-group">
+                    <label for="study-blocks">Study Block Duration (minutes)</label>
+                    <input type="number" id="study-blocks" min="20" max="120" value="45">
+                </div>
+                
+                <button onclick="generateTimetable()">
+                    <span>Generate Timetable</span>
+                </button>
+            </div>
+
+            <div class="timetable-section">
+                <h2>📅 Your Study Timetable</h2>
+                <div id="timetable-container">
+                    <p>Your generated timetable will appear here. Fill in the form and click "Generate Timetable" to get started.</p>
+                </div>
+                
+                <div class="actions no-print" id="main-actions" style="display: none;">
+                    <button class="print-btn" onclick="window.print()">Print</button>
+                    <button id="save-btn" onclick="exportTimetable()">Save as JPEG</button>
+                </div>
+                
+                <div id="export-status"></div>
+                <div class="spinner" id="spinner"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="timetable-modal">
+        <div class="modal-content">
+            <button class="close-modal" id="close-modal-btn">×</button>
+            <div id="modal-timetable-content"></div>
+            <div class="modal-actions">
+                <button id="modal-download-btn" onclick="exportFromModal()">Download JPEG</button>
+                <button id="modal-print-btn" onclick="printFromModal()">Print</button>
+            </div>
+            <div id="modal-export-status"></div>
+            <div class="spinner" id="modal-spinner" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script>
+        // Add a new time slot
+        function addTimeSlot() {
+            const timeSlots = document.getElementById('time-slots');
+            const newSlot = document.createElement('div');
+            newSlot.className = 'time-slot';
+            newSlot.innerHTML = `
+                <input type="time" class="start-time" value="08:00">
+                <span>to</span>
+                <input type="time" class="end-time" value="16:00">
+                <button class="remove-slot" onclick="removeTimeSlot(this)">×</button>
+            `;
+            timeSlots.appendChild(newSlot);
+        }
+        
+        // Remove a time slot
+        function removeTimeSlot(button) {
+            const timeSlots = document.getElementById('time-slots');
+            if (timeSlots.children.length > 1) {
+                button.parentElement.remove();
+            } else {
+                alert("You need at least one time slot.");
+            }
+        }
+        
+        // Show loading overlay
+        function showLoading() {
+            const overlay = document.getElementById('loadingOverlay');
+            overlay.classList.add('active');
+            
+            // Change loading message every few seconds
+            const messages = [
+                "Optimizing your schedule...",
+                "Calculating time blocks...",
+                "Almost there...",
+                "Finalizing your timetable..."
+            ];
+            
+            const subtext = document.querySelector('.loading-subtext');
+            let counter = 0;
+            
+            const interval = setInterval(() => {
+                subtext.textContent = messages[counter % messages.length];
+                counter++;
+            }, 2000);
+            
+            return interval;
+        }
+        
+        // Hide loading overlay
+        function hideLoading(interval) {
+            const overlay = document.getElementById('loadingOverlay');
+            overlay.classList.remove('active');
+            clearInterval(interval);
+        }
+        
+        // Generate the timetable
+        function generateTimetable() {
+            const loadingInterval = showLoading();
+            
+            // Simulate processing time (1-2 seconds)
+            setTimeout(() => {
+                const studentName = document.getElementById('student-name').value || 'Student';
+                const weekStart = document.getElementById('week-start').value;
+                const subjectsInput = document.getElementById('subjects').value;
+                const breakDuration = parseInt(document.getElementById('break-duration').value);
+                const studyBlockDuration = parseInt(document.getElementById('study-blocks').value);
+                
+                // Process time slots
+                const timeSlots = [];
+                const slotElements = document.querySelectorAll('.time-slot');
+                slotElements.forEach(slot => {
+                    const startTime = slot.querySelector('.start-time').value;
+                    const endTime = slot.querySelector('.end-time').value;
+                    timeSlots.push({ start: startTime, end: endTime });
+                });
+                
+                // Process subjects
+                const subjects = subjectsInput.split(',')
+                    .map(subject => subject.trim())
+                    .filter(subject => subject.length > 0);
+                
+                if (subjects.length === 0) {
+                    hideLoading(loadingInterval);
+                    alert("Please enter at least one subject.");
+                    return;
+                }
+                
+                // Generate days of week based on start day
+                const daysOfWeek = [];
+                if (weekStart === 'Monday') {
+                    daysOfWeek.push('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
+                } else {
+                    daysOfWeek.push('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+                }
+                
+                // Create timetable HTML
+                let timetableHTML = `
+                    <div id="timetable-to-export">
+                        <h3>${studentName}'s Weekly Study Timetable</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    ${daysOfWeek.map(day => `<th>${day}</th>`).join('')}
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+                
+                // Generate time rows (simplified for this example)
+                const sampleTimes = ['08:00-09:00', '09:00-10:00', '10:00-11:00', '11:00-12:00', 
+                                    '12:00-13:00', '13:00-14:00', '14:00-15:00', '15:00-16:00'];
+                
+                sampleTimes.forEach(timeSlot => {
+                    timetableHTML += `<tr><td>${timeSlot}</td>`;
+                    
+                    daysOfWeek.forEach(day => {
+                        const random = Math.random();
+                        if (random < 0.2) {
+                            timetableHTML += `<td class="break-cell">Break</td>`;
+                        } else if (random < 0.3) {
+                            timetableHTML += `<td class="empty-cell"></td>`;
+                        } else {
+                            const subject = subjects[Math.floor(Math.random() * subjects.length)];
+                            timetableHTML += `<td class="subject-cell">${subject}</td>`;
+                        }
+                    });
+                    
+                    timetableHTML += `</tr>`;
+                });
+                
+                timetableHTML += `
+                            </tbody>
+                        </table>
+                        <p class="no-print" style="text-align: center; margin-top: 1rem; color: #64748b;">
+                            Generated on ${new Date().toLocaleDateString()}
+                        </p>
+                    </div>
+                `;
+                
+                // Show in modal
+                document.getElementById('modal-timetable-content').innerHTML = timetableHTML;
+                document.getElementById('timetable-modal').style.display = 'flex';
+                
+                // Hide main actions (they'll be in the modal)
+                document.getElementById('main-actions').style.display = 'none';
+                
+                // Update main container with a message
+                document.getElementById('timetable-container').innerHTML = `
+                    <p style="text-align: center; color: #64748b;">
+                        Your timetable has been generated! View it in the popup window.
+                    </p>
+                `;
+                
+                hideLoading(loadingInterval);
+            }, 1500 + Math.random() * 1000);
+        }
+        
+        // Export timetable as JPEG from main page
+        function exportTimetable() {
+            const timetableElement = document.getElementById('timetable-to-export');
+            const exportStatus = document.getElementById('export-status');
+            const spinner = document.getElementById('spinner');
+            const saveBtn = document.getElementById('save-btn');
+            
+            if (!timetableElement) {
+                alert("Please generate a timetable first.");
+                return;
+            }
+            
+            saveBtn.disabled = true;
+            spinner.style.display = 'block';
+            exportStatus.textContent = 'Preparing export...';
+            
+            html2canvas(timetableElement, {
+                scale: 2,
+                logging: false,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: '#ffffff'
+            }).then(canvas => {
+                const imageData = canvas.toDataURL('image/jpeg', 0.9);
+                const link = document.createElement('a');
+                const studentName = document.getElementById('student-name').value || 'timetable';
+                const fileName = `${studentName.replace(/\s+/g, '_')}_timetable_${new Date().toISOString().slice(0,10)}.jpg`;
+                
+                link.href = imageData;
+                link.download = fileName;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                exportStatus.textContent = 'Timetable exported successfully!';
+                spinner.style.display = 'none';
+                saveBtn.disabled = false;
+                
+                setTimeout(() => {
+                    exportStatus.textContent = '';
+                }, 3000);
+            }).catch(err => {
+                console.error('Error exporting timetable:', err);
+                exportStatus.textContent = 'Error exporting timetable. Please try again.';
+                spinner.style.display = 'none';
+                saveBtn.disabled = false;
+            });
+        }
+        
+        // Export from modal
+        function exportFromModal() {
+            const timetableElement = document.getElementById('timetable-to-export');
+            const exportStatus = document.getElementById('modal-export-status');
+            const spinner = document.getElementById('modal-spinner');
+            const downloadBtn = document.getElementById('modal-download-btn');
+            
+            downloadBtn.disabled = true;
+            spinner.style.display = 'block';
+            exportStatus.textContent = 'Preparing download...';
+            
+            html2canvas(timetableElement, {
+                scale: 2,
+                logging: false,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: '#ffffff'
+            }).then(canvas => {
+                const imageData = canvas.toDataURL('image/jpeg', 0.9);
+                const link = document.createElement('a');
+                const studentName = document.getElementById('student-name').value || 'timetable';
+                const fileName = `${studentName.replace(/\s+/g, '_')}_timetable_${new Date().toISOString().slice(0,10)}.jpg`;
+                
+                link.href = imageData;
+                link.download = fileName;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                exportStatus.textContent = 'Download complete!';
+                spinner.style.display = 'none';
+                downloadBtn.disabled = false;
+                
+                setTimeout(() => {
+                    exportStatus.textContent = '';
+                }, 3000);
+            }).catch(err => {
+                console.error('Error exporting timetable:', err);
+                exportStatus.textContent = 'Error exporting timetable. Please try again.';
+                spinner.style.display = 'none';
+                downloadBtn.disabled = false;
+            });
+        }
+        
+        // Print from modal
+        function printFromModal() {
+            const timetableElement = document.getElementById('timetable-to-export');
+            const printWindow = window.open('', '', 'width=800,height=600');
+            
+            printWindow.document.write(`
+                <html>
+                    <head>
+                        <title>Print Timetable</title>
+                        <style>
+                            body { font-family: Arial, sans-serif; padding: 20px; }
+                            table { width: 100%; border-collapse: collapse; }
+                            th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+                            th { background-color: #3b82f6; color: white; }
+                            .subject-cell { background-color: #dbeafe; }
+                            .break-cell { background-color: #fef3c7; }
+                        </style>
+                    </head>
+                    <body>
+                        ${timetableElement.outerHTML}
+                    </body>
+                </html>
+            `);
+            
+            printWindow.document.close();
+            printWindow.focus();
+            
+            setTimeout(() => {
+                printWindow.print();
+                printWindow.close();
+            }, 500);
+        }
+        
+        // Close modal
+        document.getElementById('close-modal-btn').onclick = function() {
+            document.getElementById('timetable-modal').style.display = 'none';
+            document.getElementById('main-actions').style.display = 'flex';
+        };
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('timetable-modal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+                document.getElementById('main-actions').style.display = 'flex';
+            }
+        };
+        
+        // Initialize with one time slot
+        window.onload = function() {
+            // You can add any initialization code here if needed
+        };
+    </script>
+</body>
+</html>
